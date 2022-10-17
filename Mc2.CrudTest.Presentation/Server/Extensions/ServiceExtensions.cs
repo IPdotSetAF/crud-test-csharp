@@ -15,5 +15,10 @@ namespace Mc2.CrudTest.Presentation.Server.Extensions
                 options.UseSqlServer(ConnectionString);
             });
         }
+
+        public static void ConfigureAutoMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(MappingProfile));
+        }
     }
 }
