@@ -12,6 +12,7 @@
 
   <ItemGroup>
 	  <ProjectReference Include="..\Shared\Mc2.CrudTest.Shared.csproj" />
+	  <ProjectReference Include="..\..\DTOs\DTOs.csproj" />
   </ItemGroup>
 
 </Project>
