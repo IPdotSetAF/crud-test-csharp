@@ -9,7 +9,6 @@ namespace DTOs.Customer
     public class CustomerUpdateDTO
     {
         public ulong PhoneNumber { get; set; }
-        public string Email { get; set; }
         public ulong BankAccountNumber { get; set; }
     }
 }

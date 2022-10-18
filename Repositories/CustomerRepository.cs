@@ -12,7 +12,7 @@ namespace Repositories
         }
 
         public async Task<IEnumerable<Customer>> GetAllCustomersAsync(bool trackChanges) =>
-            await FindAll( trackChanges)
+            await FindAll(trackChanges)
                 .ToListAsync();
 
         public async Task<Customer?> GetCustomerAsync(Guid customerId, bool trackChanges) =>
@@ -27,5 +27,15 @@ namespace Repositories
 
         public void UpdateCustomer(Customer customer) =>
             Update(customer);
+
+        public async Task<bool> EmailExists(string email) =>
+            (await FindByCondition(c => c.Email.Equals(email), false)
+                .FirstOrDefaultAsync()) != null;
+
+        public async Task<bool> CustomerExists(Customer customer) =>
+            (await FindByCondition(c => c.FirstName.Equals(customer.FirstName) &&
+                                        c.LastName.Equals(customer.LastName) &&
+                                        c.DateOfBirth == customer.DateOfBirth, false)
+                .FirstOrDefaultAsync()) != null;
     }
 }

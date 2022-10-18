@@ -3,6 +3,7 @@ using Contracts;
 using DTOs;
 using DTOs.Customer;
 using Entities.Models;
+using Mc2.CrudTest.Presentation.Server.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -60,6 +61,18 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
 
             Customer customer = Mapper.Map<Customer>(customerCreateDto);
 
+            //check unique fName+lName+bDate combination
+            if (await Repository.Customer.CustomerExists(customer))
+                return BadRequest(new ErrorDTO(BadRequest().StatusCode, "Customer with this firstName,lastName,dateOfBirth already exists."));
+
+            //check valid phone number
+            if (!Utils.IsPhoneNumberValid(customer.PhoneNumber))
+                return BadRequest(new ErrorDTO(BadRequest().StatusCode, "Phone number is not valid."));
+
+            //check unique Email addrss
+            if (await Repository.Customer.EmailExists(customer.Email))
+                return BadRequest(new ErrorDTO(BadRequest().StatusCode, "Email already Exists."));
+
             Repository.Customer.CreateCustomer(customer);
             await Repository.SaveAsync();
 
@@ -81,6 +94,10 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
 
             if (customer == null)
                 return NotFound(new ErrorDTO(NotFound().StatusCode, $"Customer with Id: {customerId} does not exist."));
+
+            //check valid phone number
+            if(!Utils.IsPhoneNumberValid(customer.PhoneNumber))
+                return BadRequest(new ErrorDTO(BadRequest().StatusCode, "Phone number is not valid."));
 
             Mapper.Map(customerUpdateDto, customer);
             await Repository.SaveAsync();

@@ -9,5 +9,7 @@ namespace Contracts
         void CreateCustomer(Customer customer);
         void DeleteCustomer(Customer customer);
         void UpdateCustomer(Customer customer);
+        Task<bool> EmailExists(string email);
+        Task<bool> CustomerExists(Customer customer);
     }
 }
