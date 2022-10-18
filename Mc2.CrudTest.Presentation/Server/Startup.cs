@@ -24,7 +24,10 @@ namespace Mc2.CrudTest.Presentation.Server
             services.ConfigureRepositoryManager();
             services.ConfigureAutoMapper();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddRazorPages();
         }
 
