@@ -8,12 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Mc2.CrudTest.Presentation.Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class CustomerController : ApplicationControllerBase
     {
         public CustomerController(IRepositoryManager repository, IMapper mapper) : base(repository, mapper)
@@ -21,9 +23,12 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
         }
 
 
-        [HttpGet("GetCustomersByUser")]
+        [HttpGet]
         public async Task<IActionResult> GetAllCustomersForUser()
         {
+            IPAddress userIp = HttpContext.Request.HttpContext.Connection.RemoteIpAddress;
+            Debug.WriteLine($"[Request from {userIp}: Serving Get() response: ");
+
             IEnumerable<Customer> customers = await Repository.Customer.GetAllCustomersAsync(false);
 
             IEnumerable<CustomerGetDTO> customerDTOs = Mapper.Map<IEnumerable<CustomerGetDTO>>(customers);
