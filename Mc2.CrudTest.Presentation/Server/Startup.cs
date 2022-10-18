@@ -21,6 +21,7 @@ namespace Mc2.CrudTest.Presentation.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureRepositoryContext(Configuration);
+            services.ConfigureRepositoryManager();
             services.ConfigureAutoMapper();
 
             services.AddControllersWithViews();

@@ -1,7 +1,9 @@
-﻿using Entities;
+﻿using Contracts;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Repositories;
 
 namespace Mc2.CrudTest.Presentation.Server.Extensions
 {
@@ -14,6 +16,11 @@ namespace Mc2.CrudTest.Presentation.Server.Extensions
                 string ConnectionString = configuration.GetConnectionString("Crud_Test_DB");
                 options.UseSqlServer(ConnectionString);
             });
+        }
+
+        public static void ConfigureRepositoryManager(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
         }
 
         public static void ConfigureAutoMapper(this IServiceCollection services)
