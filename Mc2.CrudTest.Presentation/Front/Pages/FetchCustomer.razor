@@ -31,6 +31,9 @@ else
         <tbody>
             @foreach (CustomerGetDTO customer in _customers)
             {
+                string bNumber = customer.BankAccountNumber.ToString();
+                bNumber.Insert(0, new string('0', 16 - bNumber.Length));
+
                 <tr>
                      <td>@customer.Id.ToString()</td>
                      <td>@customer.FirstName</td>
@@ -38,7 +41,7 @@ else
                      <td>@customer.DateOfBirth.ToShortDateString()</td>
                      <td>+@customer.PhoneNumber.ToString()</td>
                      <td>@customer.Email</td>
-                     <td>@customer.BankAccountNumber.ToString()</td>
+                     <td>@bNumber.Substring(0,4)-@bNumber.Substring(4,4)-@bNumber.Substring(8,4)-@bNumber.Substring(12,4)</td>
                      <td><input type="submit" value="Remove" class="delete" @onclick="() => DeleteCustomerById(customer.Id)"/></td>
                 </tr>
             }
