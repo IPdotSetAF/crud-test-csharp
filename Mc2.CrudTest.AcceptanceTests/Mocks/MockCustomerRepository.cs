@@ -61,10 +61,10 @@ namespace Mc2.CrudTest.AcceptanceTests.Mocks
             };
 
             mock.Setup(m => m.GetAllCustomersAsync(It.IsAny<bool>()))
-                .Returns(() => Customers);
+                .ReturnsAsync(() => Customers);
 
             mock.Setup(m => m.GetCustomerAsync(It.IsAny<Guid>(), It.IsAny<bool>()))
-                .Returns((Guid id) => Customers.FirstOrDefault(c => c.Id == id));
+                .ReturnsAsync((Guid id, bool trackChanges) => Customers.FirstOrDefault(c => c.Id == id));
 
             mock.Setup(m => m.CreateCustomer(It.IsAny<Customer>()))
                 .Callback(() => { return; });
@@ -76,10 +76,10 @@ namespace Mc2.CrudTest.AcceptanceTests.Mocks
                 .Callback(() => { return; });
 
             mock.Setup(m => m.EmailExists(It.IsAny<string>()))
-                .Returns((string email) => Customers.FirstOrDefault(c => c.Email.Equals(email)) != null);
+                .ReturnsAsync((string email) => Customers.FirstOrDefault(c => c.Email.Equals(email)) != null);
 
             mock.Setup(m => m.CustomerExists(It.IsAny<Customer>()))
-                .Returns((Customer customer) => Customers.FirstOrDefault(c => c.FirstName.Equals(customer.FirstName) &&
+                .ReturnsAsync((Customer customer) => Customers.FirstOrDefault(c => c.FirstName.Equals(customer.FirstName) &&
                                                                             c.LastName.Equals(customer.LastName) &&
                                                                             c.DateOfBirth == customer.DateOfBirth) != null);
 

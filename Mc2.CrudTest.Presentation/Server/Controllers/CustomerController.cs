@@ -27,9 +27,6 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllCustomers()
         {
-            IPAddress userIp = HttpContext.Request.HttpContext.Connection.RemoteIpAddress;
-            Debug.WriteLine($"[Request from {userIp}: Serving Get() response: ");
-
             IEnumerable<Customer> customers = await Repository.Customer.GetAllCustomersAsync(false);
 
             IEnumerable<CustomerGetDTO> customerDTOs = Mapper.Map<IEnumerable<CustomerGetDTO>>(customers);
