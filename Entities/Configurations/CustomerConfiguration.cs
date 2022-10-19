@@ -1,12 +1,7 @@
 ﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+using SharedUtils;
 
 namespace Entities.Configurations
 {
@@ -17,7 +12,7 @@ namespace Entities.Configurations
             builder.HasData(
                 new Customer
                 {
-                    Id = SeededGuid(1),
+                    Id = GuidUtils.SeededGuid(1),
                     FirstName ="Ali",
                     LastName ="Nazari",
                     PhoneNumber = 989387016860,
@@ -27,7 +22,7 @@ namespace Entities.Configurations
                 },
                 new Customer
                 {
-                    Id = SeededGuid(2),
+                    Id = GuidUtils.SeededGuid(2),
                     FirstName = "Mahdi",
                     LastName = "Nazari",
                     PhoneNumber = 989387016860,
@@ -37,7 +32,7 @@ namespace Entities.Configurations
                 },
                 new Customer
                 {
-                    Id = SeededGuid(3),
+                    Id = GuidUtils.SeededGuid(3),
                     FirstName = "Saeed",
                     LastName = "Rezaii",
                     PhoneNumber = 19387016860,
@@ -47,7 +42,7 @@ namespace Entities.Configurations
                 },
                 new Customer
                 {
-                    Id = SeededGuid(4),
+                    Id = GuidUtils.SeededGuid(4),
                     FirstName = "Hooshang",
                     LastName = "Motahari",
                     PhoneNumber = 989387016860,
@@ -56,13 +51,6 @@ namespace Entities.Configurations
                     DateOfBirth = DateTime.Now
                 }
             ); ;
-        }
-
-        private static Guid SeededGuid(int seed)
-        {
-            byte[] bytes = new byte[16];
-            BitConverter.GetBytes(seed).CopyTo(bytes, 0);
-            return new Guid(MD5.HashData(bytes));
         }
     }
 }

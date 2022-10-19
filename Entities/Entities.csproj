@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\SharedUtils.csproj" />
+  </ItemGroup>
+
 </Project>

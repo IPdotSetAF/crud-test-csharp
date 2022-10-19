@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\Mc2.CrudTest.Presentation\Server\Mc2.CrudTest.Presentation.Server.csproj" />
+    <ProjectReference Include="..\Utils\SharedUtils.csproj" />
   </ItemGroup>
 
 </Project>

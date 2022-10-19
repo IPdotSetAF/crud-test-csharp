@@ -4,9 +4,9 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using SharedUtils;
 
 namespace Mc2.CrudTest.AcceptanceTests.Mocks
 {
@@ -20,7 +20,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Mocks
             {
                 new Customer
                 {
-                    Id = SeededGuid(1),
+                    Id = GuidUtils.SeededGuid(1),
                     FirstName ="Ali",
                     LastName ="Nazari",
                     PhoneNumber = 989387016860,
@@ -30,7 +30,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Mocks
                 },
                 new Customer
                 {
-                    Id = SeededGuid(2),
+                    Id = GuidUtils.SeededGuid(2),
                     FirstName = "Mahdi",
                     LastName = "Nazari",
                     PhoneNumber = 982133341210,
@@ -40,7 +40,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Mocks
                 },
                 new Customer
                 {
-                    Id = SeededGuid(3),
+                    Id = GuidUtils.SeededGuid(3),
                     FirstName = "Saeed",
                     LastName = "Rezaii",
                     PhoneNumber = 16094032648,
@@ -50,7 +50,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Mocks
                 },
                 new Customer
                 {
-                    Id = SeededGuid(4),
+                    Id = GuidUtils.SeededGuid(4),
                     FirstName = "Hooshang",
                     LastName = "Motahari",
                     PhoneNumber = 989387016860,
@@ -84,13 +84,6 @@ namespace Mc2.CrudTest.AcceptanceTests.Mocks
                                                                             c.DateOfBirth == customer.DateOfBirth) != null);
 
             return mock;
-        }
-
-        private static Guid SeededGuid(int seed)
-        {
-            byte[] bytes = new byte[16];
-            BitConverter.GetBytes(seed).CopyTo(bytes, 0);
-            return new Guid(MD5.HashData(bytes));
         }
     }
 }
