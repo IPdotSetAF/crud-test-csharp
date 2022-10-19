@@ -25,7 +25,7 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCustomersForUser()
+        public async Task<IActionResult> GetAllCustomers()
         {
             IPAddress userIp = HttpContext.Request.HttpContext.Connection.RemoteIpAddress;
             Debug.WriteLine($"[Request from {userIp}: Serving Get() response: ");
