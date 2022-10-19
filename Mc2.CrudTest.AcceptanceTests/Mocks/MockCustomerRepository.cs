@@ -26,7 +26,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Mocks
                     PhoneNumber = 989387016860,
                     BankAccountNumber=1212121212121212,
                     Email="ipdotsetaf.work@gmail.com",
-                    DateOfBirth= DateTime.Now
+                    DateOfBirth= new DateTime(2012,1,20)
                 },
                 new Customer
                 {

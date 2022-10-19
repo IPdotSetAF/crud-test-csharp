@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharedUtils;
 using Xunit;
+using DTOs;
 
 namespace Mc2.CrudTest.AcceptanceTests
 {
@@ -56,6 +57,90 @@ namespace Mc2.CrudTest.AcceptanceTests
             Assert.IsAssignableFrom<CustomerGetDTO>(result.Value);
         }
 
+        [Theory]
+        [InlineData("mahdi", "nazari", "2012-1-20", 989387016860, "test@test.com", 1212121212121212, true)]
+        [InlineData("mahdi", "nazari", "2012-1-20", 989387016860, "ipdotsetaf.work@gmail.com", 1212121212121212, false)]
+        [InlineData("mahdi", "nazari", "2012-1-20", 989016860, "test@test.com", 1212121212121212, false)]
+        [InlineData("Ali", "Nazari", "2012-1-20", 989387016860, "test@test.com", 1212121212121212, false)]
+        public void GivenValidRequest_WhenCreatingCustomer_ThenCreatedReturns(string? firstName, string? lastName, DateTime dateOfBirth, ulong phoneNumber, string? email, ulong bankAccNumber, bool isValid)
+        {
+            var repositoryManagerMock = MockRepositoryManager.GetMock();
+            var mapper = GetMapper();
+            var customerController = new CustomerController(repositoryManagerMock.Object, mapper);
 
+            var customer = new CustomerCreateDTO
+            {
+                FirstName= firstName,
+                LastName = lastName,
+                BankAccountNumber = bankAccNumber,
+                PhoneNumber = phoneNumber,
+                Email= email,
+                DateOfBirth= dateOfBirth
+            };
+
+            var result = customerController.CreateCustomer(customer).Result as ObjectResult;
+
+            Assert.NotNull(result);
+            if (isValid)
+            {
+                Assert.IsAssignableFrom<CreatedAtRouteResult>(result);
+                Assert.Equal(StatusCodes.Status201Created, result!.StatusCode);
+                Assert.Equal("CustomerById", (result as CreatedAtRouteResult)!.RouteName);
+            }
+            else
+            {
+                Assert.IsAssignableFrom<ErrorDTO>(result.Value);
+                Assert.Equal(StatusCodes.Status400BadRequest,result!.StatusCode);
+            }
+        }
+
+        [Theory]
+        [InlineData( 1,989387016860, 1212121212121212, true)]
+        [InlineData(1, 989016860, 1212121212121212, false)]
+        [InlineData(5, 989387016860, 1212121212121212, false)]
+        public void GivenValidRequest_WhenUpdateingCustomer_ThenNothingReturns(int guidSeed, ulong phoneNumber, ulong bankAccNumber, bool isValid)
+        {
+            var repositoryManagerMock = MockRepositoryManager.GetMock();
+            var mapper = GetMapper();
+            var customerController = new CustomerController(repositoryManagerMock.Object, mapper);
+
+            var customer = new CustomerUpdateDTO
+            {
+                BankAccountNumber = bankAccNumber,
+                PhoneNumber = phoneNumber
+            };
+
+            var result = customerController.UpdateCustomer(GuidUtils.SeededGuid(guidSeed),customer).Result as ObjectResult;
+
+            if (isValid)
+            {
+                Assert.Null(result);
+            }
+            else
+            {
+                Assert.IsAssignableFrom<ErrorDTO>(result.Value);
+            }
+        }
+
+        [Theory]
+        [InlineData(1, true)]
+        [InlineData(5, false)]
+        public void GivenAnIdOfAnExistingCustomer_WhenDeletingCustomer_ThenNothingReturns(int guidSeed, bool isValid)
+        {
+            var repositoryManagerMock = MockRepositoryManager.GetMock();
+            var mapper = GetMapper();
+            var customerController = new CustomerController(repositoryManagerMock.Object, mapper);
+
+            var result = customerController.DeleteCustomer(GuidUtils.SeededGuid(guidSeed)).Result as ObjectResult;
+
+            if (isValid)
+            {
+                Assert.Null(result);
+            }
+            else
+            {
+                Assert.IsAssignableFrom<NotFoundObjectResult>(result);
+            }
+        }
     }
 }
