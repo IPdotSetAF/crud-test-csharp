@@ -23,6 +23,7 @@ namespace Mc2.CrudTest.Presentation.Server
             services.ConfigureRepositoryContext(Configuration);
             services.ConfigureRepositoryManager();
             services.ConfigureAutoMapper();
+            services.DisableDefaultModelStateValidation();
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
             {

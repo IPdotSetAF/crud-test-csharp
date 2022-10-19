@@ -47,7 +47,8 @@
         </label>
     </p>
 
-    <p>@_errors</p>
+    <p id="error">@_errors</p>
+    <p id="success">@_success</p>
 
     <p>
         <input type="submit" value="Submit" class="submit" onclick="@SubmitCustomer"/>
@@ -61,6 +62,15 @@
     #email {
         width:40ch; 
     }
+
+    #error {
+        color:red;
+    }
+
+    #success {
+        color:green;
+    }
+
 </style>
 
 @code {
@@ -69,19 +79,46 @@
     private string _phoneNumberText;
     private string _b1, _b2, _b3, _b4;
 
-    private string _errors = "";
+    private string _errors = "", _success = "";
 
     private async Task SubmitCustomer()
     {
+        if (string.IsNullOrEmpty(_phoneNumberText))
+        {
+            _errors = "must enter phone number.";
+            _success = "";
+            return;
+        }
+
+        if (string.IsNullOrEmpty(_b1) ||
+            string.IsNullOrEmpty(_b2) ||
+            string.IsNullOrEmpty(_b3) ||
+            string.IsNullOrEmpty(_b4) || 
+            _b1.Length != 4 || 
+            _b2.Length != 4 || 
+            _b3.Length != 4 || 
+            _b4.Length != 4)
+        {
+            _errors = "invalid bank account number.";
+            _success = "";
+            return;
+        }
+
         _customer.PhoneNumber = UInt64.Parse(_phoneNumberText);
 
         _customer.BankAccountNumber = UInt64.Parse($"{_b1}{_b2}{_b3}{_b4}");
 
-        var response =await _http.PostAsJsonAsync($"api/Customer", _customer);
+        var response = await _http.PostAsJsonAsync($"api/Customer", _customer);
 
         if (!response.IsSuccessStatusCode)
         {
             _errors = (await response.Content.ReadFromJsonAsync<ErrorDTO>()).Description;
+            _success = "";
+        }
+        else
+        {
+            _errors = "";
+            _success = "Customer added successfully";
         }
     }
 }
