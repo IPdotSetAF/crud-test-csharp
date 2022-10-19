@@ -96,7 +96,7 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
                 return NotFound(new ErrorDTO(NotFound().StatusCode, $"Customer with Id: {customerId} does not exist."));
 
             //check valid phone number
-            if(!Utils.IsPhoneNumberValid(customer.PhoneNumber))
+            if(!Utils.IsPhoneNumberValid(customerUpdateDto.PhoneNumber))
                 return BadRequest(new ErrorDTO(BadRequest().StatusCode, "Phone number is not valid."));
 
             Mapper.Map(customerUpdateDto, customer);
