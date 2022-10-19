@@ -5,61 +5,46 @@
 
 <p>This component lets you to create a new customer and sends it to the server.</p>
 
-@*
-<EditForm Model="@customer" OnValidSubmit="@SubmitCustomer">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
     <p>
         <label>
-            First name :
-            <InputText @bind-Value="customer.FirstName"/>
+            First name :&emsp;
+            <input id="fname" name="First name" type="text" value=""/>
         </label>
     </p>
     <p>
         <label>
-            Last name :
-            <InputText @bind-Value="customer.LastName"/>
+            Last name :&emsp;
+            <input id="lname" name="Last name" type="text" value=""/>
         </label>
     </p>
     <p>
         <label>
-            Date of birth :
-            <InputDate @bind-Value="customer.DateOfBirth"/>
+            Date of birth :&emsp;
+            <input id="bdate" name="Date of birth" type="date" value=""/>
         </label>
     </p>
     <p>
         <label>
-            Phone number :
-            <InputNumber @bind-Value="customer.PhoneNumber"/>
+            Phone number :&emsp;
+            + <input id="pnumber" name="Phone number" type="number" value=""/>
         </label>
     </p>
     <p>
         <label>
-            Email :
-            <input type="email" @bind-value="customer.Email"/>
+            Email :&emsp;
+            <input id="email"name="Email" type="email" value=""/>
         </label>
     </p>
     <p>
         <label>
-            Banck account number :
+            Banck account number :&emsp;
             <input id="baccount1" class="baccnum" name="Banck account number" type="number" value=""/> - <input id="baccount2" class="baccnum"  name="Banck account number" type="number" value=""/> - <input id="baccount3"  class="baccnum" name="Banck account number" type="number" value=""/> - <input id="baccount4" class="baccnum"  name="Banck account number" type="number" value=""/>
         </label>
     </p>
 
-    <button type="submit">Submit</button>
-
-</EditForm>
-*@
-
-<p>First name :&emsp;<input id="fname" name="First name" type="text" value=""/></p>
-<p>Last name :&emsp;<input id="lname" name="Last name" type="text" value=""/></p>
-<p>Date of birth :&emsp;<input id="bdate" name="Date of birth" type="date" value=""/></p>
-<p>Phone number :&emsp;+ <input id="pnumber" name="Phone number" type="number" value=""/></p>
-<p>Email :&emsp;<input id="email"name="Email" type="email" value=""/></p>
-<p>Banck account number :&emsp;<input id="baccount1" class="baccnum" name="Banck account number" type="number" value=""/> - <input id="baccount2" class="baccnum"  name="Banck account number" type="number" value=""/> - <input id="baccount3"  class="baccnum" name="Banck account number" type="number" value=""/> - <input id="baccount4" class="baccnum"  name="Banck account number" type="number" value=""/></p>
-
-<p><input type="submit" value="Submit" class="submit" onclick="@SubmitCustomer"/></p>
+    <p>
+        <input type="submit" value="Submit" class="submit" onclick="@SubmitCustomer"/>
+    </p>
 
 <style>
     .baccnum {
@@ -72,10 +57,10 @@
 </style>
 
 @code {
-    private CustomerCreateDTO customer = new CustomerCreateDTO(); 
+    private CustomerCreateDTO customer = new CustomerCreateDTO();
 
     private async Task SubmitCustomer()
     {
-        
+
     }
 }
