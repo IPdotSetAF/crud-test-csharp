@@ -6,7 +6,7 @@
 
 <p>This component fetches all customers from the server.</p>
 
-<p>Customer ID :&emsp;<input id="customerId" name="Customer ID" type="text" value=""/>&emsp;<input type="submit" value="Fetch Customer" class="submit" onclick="@GetCustomerById"/></p>
+<p>Customer ID :&emsp;<input id="customerId" name="Customer ID" type="text" @bind="_idText"/>&emsp;<input type="submit" value="Fetch Customer" class="submit" onclick="@GetCustomerById"/></p>
 
 
 @if (_customers == null)
@@ -39,7 +39,7 @@ else
                      <td>+@customer.PhoneNumber.ToString()</td>
                      <td>@customer.Email</td>
                      <td>@customer.BankAccountNumber.ToString()</td>
-                     <td><input type="submit" value="Remove" class="delete" onclick="@DeleteCustomerById"/></td>
+                     <td><input type="submit" value="Remove" class="delete" @onclick="() => DeleteCustomerById(customer.Id)"/></td>
                 </tr>
             }
         </tbody>
@@ -47,6 +47,7 @@ else
 }
 
 @code {
+    private string _idText = "";
     private CustomerGetDTO[] _customers;
 
     protected override async Task OnInitializedAsync()
@@ -58,13 +59,27 @@ else
     {
         _customers = null;
 
-        //TODO: validate id
-        //TODO: fetch customer by id
+        if (string.IsNullOrEmpty(_idText))
+        {
+            await OnInitializedAsync();
+        }
+        else
+        {
+            try
+            {
+                var id = Guid.Parse(_idText);
+                var customer = await _http.GetFromJsonAsync<CustomerGetDTO>($"api/Customer/CustomerById/{id}");
+                _customers = new []{ customer };
+            }
+            catch
+            {
+            }
+        }
     }
 
     private async Task DeleteCustomerById(Guid id)
     {
-        //TODO: remove customer
+        var customer = await _http.DeleteAsync($"api/Customer/{id}");
 
         await OnInitializedAsync();
     }
