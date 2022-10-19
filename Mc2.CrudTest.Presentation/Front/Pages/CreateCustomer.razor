@@ -1,4 +1,5 @@
 ﻿@page "/createcustomer"
+@using DTOs
 @using DTOs.Customer
 @inject HttpClient _http
 
@@ -46,6 +47,8 @@
         </label>
     </p>
 
+    <p>@_errors</p>
+
     <p>
         <input type="submit" value="Submit" class="submit" onclick="@SubmitCustomer"/>
     </p>
@@ -66,12 +69,19 @@
     private string _phoneNumberText;
     private string _b1, _b2, _b3, _b4;
 
+    private string _errors = "";
+
     private async Task SubmitCustomer()
     {
         _customer.PhoneNumber = UInt64.Parse(_phoneNumberText);
 
         _customer.BankAccountNumber = UInt64.Parse($"{_b1}{_b2}{_b3}{_b4}");
 
-        await _http.PostAsJsonAsync($"api/Customer", _customer);
+        var response =await _http.PostAsJsonAsync($"api/Customer", _customer);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            _errors = (await response.Content.ReadFromJsonAsync<ErrorDTO>()).Description;
+        }
     }
 }
