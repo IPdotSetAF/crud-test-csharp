@@ -10,7 +10,9 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Mc2.CrudTest.Presentation.Server.Controllers
@@ -54,7 +56,12 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
                 return BadRequest(new ErrorDTO(BadRequest().StatusCode, "Customer Dto for creation is null."));
 
             if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var e in ModelState.Values.SelectMany(x => x.Errors))
+                    sb.AppendLine(e.ErrorMessage);
+                return UnprocessableEntity(new ErrorDTO(UnprocessableEntity().StatusCode, sb.ToString()));
+            }
 
             Customer customer = Mapper.Map<Customer>(customerCreateDto);
 
@@ -85,7 +92,12 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
                 return BadRequest(new ErrorDTO(BadRequest().StatusCode, "Customer Dto for update is null."));
 
             if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var e in ModelState.Values.SelectMany(x => x.Errors))
+                    sb.AppendLine(e.ErrorMessage);
+                return UnprocessableEntity(new ErrorDTO(UnprocessableEntity().StatusCode, sb.ToString()));
+            }
 
             Customer customer = await Repository.Customer.GetCustomerAsync(customerId, true);
 
@@ -93,7 +105,7 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
                 return NotFound(new ErrorDTO(NotFound().StatusCode, $"Customer with Id: {customerId} does not exist."));
 
             //check valid phone number
-            if(!Utils.IsPhoneNumberValid(customerUpdateDto.PhoneNumber))
+            if (!Utils.IsPhoneNumberValid(customerUpdateDto.PhoneNumber))
                 return BadRequest(new ErrorDTO(BadRequest().StatusCode, "Phone number is not valid."));
 
             Mapper.Map(customerUpdateDto, customer);
