@@ -6,7 +6,7 @@
 
 <p>This component fetches all customers from the server.</p>
 
-<p>Customer ID :&emsp;<input id="customerId" name="Customer ID" type="text" value=""/>&emsp;<input type="submit" value="Fetch Customer" class="submit" onclick="GetCustomerById()"/></p>
+<p>Customer ID :&emsp;<input id="customerId" name="Customer ID" type="text" value=""/>&emsp;<input type="submit" value="Fetch Customer" class="submit" onclick="@GetCustomerById"/></p>
 
 
 @if (_customers == null)
@@ -25,6 +25,7 @@ else
                 <th>Phone number</th>
                 <th>Email</th>
                 <th>Bank account</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@ else
                      <td>+@customer.PhoneNumber.ToString()</td>
                      <td>@customer.Email</td>
                      <td>@customer.BankAccountNumber.ToString()</td>
+                     <td><input type="submit" value="Remove" class="delete" onclick="@DeleteCustomerById"/></td>
                 </tr>
             }
         </tbody>
@@ -56,8 +58,14 @@ else
     {
         _customers = null;
 
+        //TODO: validate id
+        //TODO: fetch customer by id
+    }
 
+    private async Task DeleteCustomerById(Guid id)
+    {
+        //TODO: remove customer
 
-        _customers = await _http.GetFromJsonAsync<CustomerGetDTO[]>("api/Customer");
-    } 
+        await OnInitializedAsync();
+    }
 }
