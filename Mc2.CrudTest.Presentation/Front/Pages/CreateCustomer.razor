@@ -1,5 +1,6 @@
 ﻿@page "/createcustomer"
 @using DTOs.Customer
+@inject HttpClient _http
 
 <h3>Create new Customer</h3>
 
@@ -8,37 +9,40 @@
     <p>
         <label>
             First name :&emsp;
-            <input id="fname" name="First name" type="text" value=""/>
+            <input id="fname" name="First name" type="text" @bind="_customer.FirstName"/>
         </label>
     </p>
     <p>
         <label>
             Last name :&emsp;
-            <input id="lname" name="Last name" type="text" value=""/>
+            <input id="lname" name="Last name" type="text" @bind="_customer.LastName"/>
         </label>
     </p>
     <p>
         <label>
             Date of birth :&emsp;
-            <input id="bdate" name="Date of birth" type="date" value=""/>
+            <input id="bdate" name="Date of birth" type="date" @bind="_customer.DateOfBirth"/>
         </label>
     </p>
     <p>
         <label>
             Phone number :&emsp;
-            + <input id="pnumber" name="Phone number" type="number" value=""/>
+            + <input id="pnumber" name="Phone number" type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" @bind="_phoneNumberText" />
         </label>
     </p>
     <p>
         <label>
             Email :&emsp;
-            <input id="email"name="Email" type="email" value=""/>
+            <input id="email"name="Email" type="email" @bind="_customer.Email"/>
         </label>
     </p>
     <p>
         <label>
             Banck account number :&emsp;
-            <input id="baccount1" class="baccnum" name="Banck account number" type="number" value=""/> - <input id="baccount2" class="baccnum"  name="Banck account number" type="number" value=""/> - <input id="baccount3"  class="baccnum" name="Banck account number" type="number" value=""/> - <input id="baccount4" class="baccnum"  name="Banck account number" type="number" value=""/>
+            <input id="baccount1" class="baccnum" name="Banck account number" type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" @bind="_b1"/> - 
+            <input id="baccount2" class="baccnum"  name="Banck account number" type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" @bind="_b2"/> - 
+            <input id="baccount3"  class="baccnum" name="Banck account number" type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" @bind="_b3"/> - 
+            <input id="baccount4" class="baccnum"  name="Banck account number" type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" @bind="_b4"/>
         </label>
     </p>
 
@@ -57,10 +61,17 @@
 </style>
 
 @code {
-    private CustomerCreateDTO customer = new CustomerCreateDTO();
+    private CustomerCreateDTO _customer = new CustomerCreateDTO();
+
+    private string _phoneNumberText;
+    private string _b1, _b2, _b3, _b4;
 
     private async Task SubmitCustomer()
     {
+        _customer.PhoneNumber = UInt64.Parse(_phoneNumberText);
 
+        _customer.BankAccountNumber = UInt64.Parse($"{_b1}{_b2}{_b3}{_b4}");
+
+        await _http.PostAsJsonAsync($"api/Customer", _customer);
     }
 }
