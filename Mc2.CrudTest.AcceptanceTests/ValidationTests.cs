@@ -30,7 +30,7 @@ namespace Mc2.CrudTest.AcceptanceTests
             {
                 FirstName = firstName,
                 LastName = lastName,
-                DateOfBirth = dateOfBirth,
+                DateOfBirth = DateOnly.FromDateTime(dateOfBirth),
                 PhoneNumber = phoneNumber,
                 Email = email,
                 BankAccountNumber = bankAccNumber

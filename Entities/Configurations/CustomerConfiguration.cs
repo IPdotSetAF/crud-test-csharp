@@ -9,6 +9,9 @@ namespace Entities.Configurations
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
+            builder.HasIndex(c => new { c.FirstName, c.LastName, c.DateOfBirth }).IsUnique(true);
+            builder.HasIndex(c=> c.Email).IsUnique(true);
+
             builder.HasData(
                 new Customer
                 {
@@ -18,7 +21,7 @@ namespace Entities.Configurations
                     PhoneNumber = 989387016860,
                     BankAccountNumber=1212121212121212,
                     Email="ipdotsetaf.work@gmail.com",
-                    DateOfBirth= DateTime.Now
+                    DateOfBirth= new DateOnly(2020,11,21)
                 },
                 new Customer
                 {
@@ -27,8 +30,8 @@ namespace Entities.Configurations
                     LastName = "Nazari",
                     PhoneNumber = 989387016860,
                     BankAccountNumber = 1212121212121212,
-                    Email = "ipdotsetaf.work@gmail.com",
-                    DateOfBirth = DateTime.Now
+                    Email = "ipdotsetaf@gmail.com",
+                    DateOfBirth = new DateOnly(2020, 11, 21)
                 },
                 new Customer
                 {
@@ -37,8 +40,8 @@ namespace Entities.Configurations
                     LastName = "Rezaii",
                     PhoneNumber = 19387016860,
                     BankAccountNumber = 1212121212121212,
-                    Email = "ipdotsetaf.work@gmail.com",
-                    DateOfBirth = DateTime.Now
+                    Email = "testt@gmail.com",
+                    DateOfBirth = new DateOnly(2020, 11, 21)
                 },
                 new Customer
                 {
@@ -47,8 +50,8 @@ namespace Entities.Configurations
                     LastName = "Motahari",
                     PhoneNumber = 989387016860,
                     BankAccountNumber = 1212121212121212,
-                    Email = "ipdotsetaf.work@gmail.com",
-                    DateOfBirth = DateTime.Now
+                    Email = "test2@gmail.com",
+                    DateOfBirth = new DateOnly(2020, 11, 21)
                 }
             ); ;
         }

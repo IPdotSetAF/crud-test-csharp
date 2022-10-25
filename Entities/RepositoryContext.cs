@@ -1,4 +1,5 @@
 ﻿using Entities.Configurations;
+using Entities.Converters;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,6 +30,16 @@ namespace Entities
             //builder.SeedTestData();
 
             base.OnModelCreating(builder);
+        }
+
+
+        protected override void ConfigureConventions(ModelConfigurationBuilder builder)
+        {
+            base.ConfigureConventions(builder);
+
+            builder.Properties<DateOnly>()
+                .HaveConversion<DateOnlyConverter>()
+                .HaveColumnType("date");
         }
     }
 }

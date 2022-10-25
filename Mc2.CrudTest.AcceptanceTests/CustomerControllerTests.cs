@@ -70,12 +70,12 @@ namespace Mc2.CrudTest.AcceptanceTests
 
             var customer = new CustomerCreateDTO
             {
-                FirstName= firstName,
+                FirstName = firstName,
                 LastName = lastName,
                 BankAccountNumber = bankAccNumber,
                 PhoneNumber = phoneNumber,
-                Email= email,
-                DateOfBirth= dateOfBirth
+                Email = email,
+                DateOfBirth = DateOnly.FromDateTime(dateOfBirth)
             };
 
             var result = customerController.CreateCustomer(customer).Result as ObjectResult;
@@ -90,12 +90,12 @@ namespace Mc2.CrudTest.AcceptanceTests
             else
             {
                 Assert.IsAssignableFrom<ErrorDTO>(result.Value);
-                Assert.Equal(StatusCodes.Status400BadRequest,result!.StatusCode);
+                Assert.Equal(StatusCodes.Status400BadRequest, result!.StatusCode);
             }
         }
 
         [Theory]
-        [InlineData( 1,989387016860, 1212121212121212, true)]
+        [InlineData(1, 989387016860, 1212121212121212, true)]
         [InlineData(1, 989016860, 1212121212121212, false)]
         [InlineData(5, 989387016860, 1212121212121212, false)]
         public void GivenValidRequest_WhenUpdateingCustomer_ThenNothingReturns(int guidSeed, ulong phoneNumber, ulong bankAccNumber, bool isValid)
@@ -110,7 +110,7 @@ namespace Mc2.CrudTest.AcceptanceTests
                 PhoneNumber = phoneNumber
             };
 
-            var result = customerController.UpdateCustomer(GuidUtils.SeededGuid(guidSeed),customer).Result as ObjectResult;
+            var result = customerController.UpdateCustomer(GuidUtils.SeededGuid(guidSeed), customer).Result as ObjectResult;
 
             if (isValid)
             {

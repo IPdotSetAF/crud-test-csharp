@@ -21,7 +21,7 @@ namespace Entities.Models
         public string LastName { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Date of birth is required.")]
-        public DateTime DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Phone number is required.")]
         public ulong PhoneNumber { get; set; }
