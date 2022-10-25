@@ -75,7 +75,7 @@ namespace Mc2.CrudTest.AcceptanceTests
                 BankAccountNumber = bankAccNumber,
                 PhoneNumber = phoneNumber,
                 Email = email,
-                DateOfBirth = DateOnly.FromDateTime(dateOfBirth)
+                DateOfBirth = dateOfBirth
             };
 
             var result = customerController.CreateCustomer(customer).Result as ObjectResult;
