@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CrudTest.Presentation\Server\CrudTest.Presentation.Server.csproj" />
+    <ProjectReference Include="..\CrudTest.Test.SharedMocks\CrudTest.Test.SharedMocks.csproj" />
   </ItemGroup>
 
 </Project>

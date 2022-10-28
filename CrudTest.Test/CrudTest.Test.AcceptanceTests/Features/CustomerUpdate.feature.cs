@@ -91,7 +91,7 @@ namespace CrudTest.Test.AcceptanceTests.Features
         [Xunit.InlineDataAttribute("5", "test@test.com", "+15417737024", "1212121212121212", "404", new string[0])]
         [Xunit.InlineDataAttribute("1", "ipdotsetaf1@gmail.com", "+15417737024", "13513131", "400", new string[0])]
         [Xunit.InlineDataAttribute("1", "gmail.com", "+15417737024", "1212121212121212", "400", new string[0])]
-        public virtual void UpdateCustomer(string idSeed, string email, string phoneNumber, string banckAccountNumber, string statusCode, string[] exampleTags)
+        public virtual void UpdateCustomer(string idSeed, string email, string phoneNumber, string bankAccountNumber, string statusCode, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "Update"};
@@ -104,7 +104,7 @@ namespace CrudTest.Test.AcceptanceTests.Features
             argumentsOfScenario.Add("IdSeed", idSeed);
             argumentsOfScenario.Add("Email", email);
             argumentsOfScenario.Add("PhoneNumber", phoneNumber);
-            argumentsOfScenario.Add("BanckAccountNumber", banckAccountNumber);
+            argumentsOfScenario.Add("BankAccountNumber", bankAccountNumber);
             argumentsOfScenario.Add("StatusCode", statusCode);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update customer", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 6

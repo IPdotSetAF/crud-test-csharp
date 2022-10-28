@@ -1,16 +1,11 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CrudTest.Core.Domain.RepositoryInterfaces;
 using CrudTest.Core.Domain.Entities;
 using CrudTest.Core.Contracts.Utils;
 
-namespace CrudTest.Test.XUnitTests.Mocks
+namespace CrudTest.Test.SharedMocks
 {
-    internal class MockCustomerRepository
+    public class MockCustomerRepository
     {
         public static Mock<ICustomerRepository> GetMock()
         {

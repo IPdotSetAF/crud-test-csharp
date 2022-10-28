@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using CrudTest.Core.Contracts.DTOs.Customer;
 using CrudTest.Core.Contracts.DTOs;
 using CrudTest.Core.Services;
-using CrudTest.Test.XUnitTests.Mocks;
+using CrudTest.Test.SharedMocks;
 using CrudTest.Presentation.Server.Controllers;
 using CrudTest.Core.Contracts.Utils;
 

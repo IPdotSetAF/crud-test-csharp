@@ -20,4 +20,8 @@
     <Folder Include="Support\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CrudTest.Test.SharedMocks\CrudTest.Test.SharedMocks.csproj" />
+  </ItemGroup>
+
 </Project>

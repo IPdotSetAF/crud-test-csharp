@@ -2,9 +2,9 @@
 using Moq;
 
 
-namespace CrudTest.Test.XUnitTests.Mocks
+namespace CrudTest.Test.SharedMocks
 {
-    internal class MockUnitOfWork
+    public class MockUnitOfWork
     {
         public static Mock<IUnitOfWork> GetMock()
         {

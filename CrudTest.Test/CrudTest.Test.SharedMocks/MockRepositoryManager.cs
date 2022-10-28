@@ -1,9 +1,9 @@
 ﻿using CrudTest.Core.Domain.RepositoryInterfaces;
 using Moq;
 
-namespace CrudTest.Test.XUnitTests.Mocks
+namespace CrudTest.Test.SharedMocks
 {
-    internal class MockRepositoryManager
+    public class MockRepositoryManager
     {
         public static Mock<IRepositoryManager> GetMock()
         {
