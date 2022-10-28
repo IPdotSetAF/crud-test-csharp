@@ -17,15 +17,10 @@ namespace CrudTest.Test.XUnitTests
 {
     public class CustomerControllerTests
     {
-
         [Fact]
         public void WhenGettingAllCustomers_ThenAllCustomersReturns()
         {
-            var repositoryManagerMock = MockRepositoryManager.GetMock();
-            var serviceManager = new ServiceManager(repositoryManagerMock.Object);
-            var customerController = new CustomerController(serviceManager);
-
-            var result = customerController.GetAllCustomers().Result as ObjectResult;
+            var result = MockCustomerController.CustomerController.GetAllCustomers().Result as ObjectResult;
 
             Assert.NotNull(result);
             Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
@@ -36,13 +31,9 @@ namespace CrudTest.Test.XUnitTests
         [Fact]
         public void GivenAnIdOfAnExistingCustomer_WhenGettingCustomerById_ThenCustomerReturns()
         {
-            var repositoryManagerMock = MockRepositoryManager.GetMock();
-            var serviceManager = new ServiceManager(repositoryManagerMock.Object);
-            var customerController = new CustomerController(serviceManager);
-
             var id = GuidUtil.SeededGuid(1);
 
-            var result = customerController.GetCustomer(id).Result as ObjectResult;
+            var result = MockCustomerController.CustomerController.GetCustomer(id).Result as ObjectResult;
 
             Assert.NotNull(result);
             Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
@@ -57,10 +48,6 @@ namespace CrudTest.Test.XUnitTests
         [InlineData("Ali", "Nazari", "2012-1-20", 989387016860, "test@test.com", 1212121212121212, false)]
         public void GivenValidRequest_WhenCreatingCustomer_ThenCreatedReturns(string? firstName, string? lastName, DateTime dateOfBirth, ulong phoneNumber, string? email, ulong bankAccNumber, bool isValid)
         {
-            var repositoryManagerMock = MockRepositoryManager.GetMock();
-            var serviceManager = new ServiceManager(repositoryManagerMock.Object);
-            var customerController = new CustomerController(serviceManager);
-
             var customer = new CustomerCreateDTO
             {
                 FirstName = firstName,
@@ -71,7 +58,7 @@ namespace CrudTest.Test.XUnitTests
                 DateOfBirth = dateOfBirth
             };
 
-            var result = customerController.CreateCustomer(customer).Result as ObjectResult;
+            var result = MockCustomerController.CustomerController.CreateCustomer(customer).Result as ObjectResult;
 
             Assert.NotNull(result);
             if (isValid)
@@ -93,17 +80,13 @@ namespace CrudTest.Test.XUnitTests
         [InlineData(5, 989387016860, 1212121212121212, false)]
         public void GivenValidRequest_WhenUpdateingCustomer_ThenNothingReturns(int guidSeed, ulong phoneNumber, ulong bankAccNumber, bool isValid)
         {
-            var repositoryManagerMock = MockRepositoryManager.GetMock();
-            var serviceManager = new ServiceManager(repositoryManagerMock.Object);
-            var customerController = new CustomerController(serviceManager);
-
             var customer = new CustomerUpdateDTO
             {
                 BankAccountNumber = bankAccNumber,
                 PhoneNumber = phoneNumber
             };
 
-            var result = customerController.UpdateCustomer(GuidUtil.SeededGuid(guidSeed), customer).Result as ObjectResult;
+            var result = MockCustomerController.CustomerController.UpdateCustomer(GuidUtil.SeededGuid(guidSeed), customer).Result as ObjectResult;
 
             if (isValid)
             {
@@ -120,11 +103,7 @@ namespace CrudTest.Test.XUnitTests
         [InlineData(5, false)]
         public void GivenAnIdOfAnExistingCustomer_WhenDeletingCustomer_ThenNothingReturns(int guidSeed, bool isValid)
         {
-            var repositoryManagerMock = MockRepositoryManager.GetMock();
-            var serviceManager = new ServiceManager(repositoryManagerMock.Object);
-            var customerController = new CustomerController(serviceManager);
-
-            var result = customerController.DeleteCustomer(GuidUtil.SeededGuid(guidSeed)).Result as ObjectResult;
+            var result = MockCustomerController.CustomerController.DeleteCustomer(GuidUtil.SeededGuid(guidSeed)).Result as ObjectResult;
 
             if (isValid)
             {
