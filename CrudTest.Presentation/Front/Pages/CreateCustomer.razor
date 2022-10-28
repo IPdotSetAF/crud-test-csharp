@@ -1,0 +1,124 @@
+﻿@page "/createcustomer"
+@using CrudTest.Core.Contracts.DTOs
+@using CrudTest.Core.Contracts.DTOs.Customer
+@inject HttpClient _http
+
+<h3>Create new Customer</h3>
+
+<p>This component lets you to create a new customer and sends it to the server.</p>
+
+    <p>
+        <label>
+            First name :&emsp;
+            <input id="fname" name="First name" type="text" @bind="_customer.FirstName"/>
+        </label>
+    </p>
+    <p>
+        <label>
+            Last name :&emsp;
+            <input id="lname" name="Last name" type="text" @bind="_customer.LastName"/>
+        </label>
+    </p>
+    <p>
+        <label>
+            Date of birth :&emsp;
+            <input id="bdate" name="Date of birth" type="date" @bind="_customer.DateOfBirth"/>
+        </label>
+    </p>
+    <p>
+        <label>
+            Phone number :&emsp;
+            + <input id="pnumber" name="Phone number" type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" @bind="_phoneNumberText" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Email :&emsp;
+            <input id="email"name="Email" type="email" @bind="_customer.Email"/>
+        </label>
+    </p>
+    <p>
+        <label>
+            Banck account number :&emsp;
+            <input id="baccount1" class="baccnum" name="Banck account number" type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" @bind="_b1"/> - 
+            <input id="baccount2" class="baccnum"  name="Banck account number" type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" @bind="_b2"/> - 
+            <input id="baccount3"  class="baccnum" name="Banck account number" type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" @bind="_b3"/> - 
+            <input id="baccount4" class="baccnum"  name="Banck account number" type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" @bind="_b4"/>
+        </label>
+    </p>
+
+    <p id="error">@_errors</p>
+    <p id="success">@_success</p>
+
+    <p>
+        <input type="submit" value="Submit" class="submit" onclick="@SubmitCustomer"/>
+    </p>
+
+<style>
+    .baccnum {
+        width: 8ch;
+    }
+
+    #email {
+        width:40ch; 
+    }
+
+    #error {
+        color:red;
+    }
+
+    #success {
+        color:green;
+    }
+
+</style>
+
+@code {
+    private CustomerCreateDTO _customer = new CustomerCreateDTO();
+
+    private string _phoneNumberText;
+    private string _b1, _b2, _b3, _b4;
+
+    private string _errors = "", _success = "";
+
+    private async Task SubmitCustomer()
+    {
+        if (string.IsNullOrEmpty(_phoneNumberText))
+        {
+            _errors = "must enter phone number.";
+            _success = "";
+            return;
+        }
+
+        if (string.IsNullOrEmpty(_b1) ||
+            string.IsNullOrEmpty(_b2) ||
+            string.IsNullOrEmpty(_b3) ||
+            string.IsNullOrEmpty(_b4) || 
+            _b1.Length != 4 || 
+            _b2.Length != 4 || 
+            _b3.Length != 4 || 
+            _b4.Length != 4)
+        {
+            _errors = "invalid bank account number.";
+            _success = "";
+            return;
+        }
+
+        _customer.PhoneNumber = UInt64.Parse(_phoneNumberText);
+
+        _customer.BankAccountNumber = UInt64.Parse($"{_b1}{_b2}{_b3}{_b4}");
+
+        var response = await _http.PostAsJsonAsync($"api/Customer", _customer);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            _errors = (await response.Content.ReadFromJsonAsync<ErrorDTO>()).Description;
+            _success = "";
+        }
+        else
+        {
+            _errors = "";
+            _success = "Customer added successfully";
+        }
+    }
+}
