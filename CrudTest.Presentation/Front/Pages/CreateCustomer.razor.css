@@ -1,0 +1,15 @@
+﻿.baccnum {
+    width: 8ch;
+}
+
+#email {
+    width: 40ch;
+}
+
+#error {
+    color: red;
+}
+
+#success {
+    color: green;
+}
