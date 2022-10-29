@@ -1,4 +1,6 @@
-﻿namespace CrudTest.Core.Domain.Exceptions
+﻿using CrudTest.Core.Domain.Entities.ValueObjects;
+
+namespace CrudTest.Core.Domain.Exceptions
 {
     public class CustomerExistsException : BadRequestException
     {
@@ -7,8 +9,8 @@
         {
         }
 
-        public CustomerExistsException(string email)
-            : base($"The customer with the Email {email} already exists.")
+        public CustomerExistsException(Email email)
+            : base($"The customer with the Email {email.Value} already exists.")
         {
         }
     }

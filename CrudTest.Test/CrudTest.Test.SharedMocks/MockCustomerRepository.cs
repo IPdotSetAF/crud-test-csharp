@@ -68,6 +68,14 @@ namespace CrudTest.Test.SharedMocks
             mock.Setup(m => m.Remove(It.IsAny<Customer>()))
                 .Callback(() => { return; });
 
+            mock.Setup(m => m.EmailExists(It.IsAny<Email>()))
+               .ReturnsAsync((Email email) => Customers.FirstOrDefault(c => c.Email.Equals(email)) != null);
+
+            mock.Setup(m => m.CustomerExists(It.IsAny<Customer>()))
+                .ReturnsAsync((Customer customer) => Customers.FirstOrDefault(c => c.FirstName.Equals(customer.FirstName) &&
+                                                                            c.LastName.Equals(customer.LastName) &&
+                                                                            c.DateOfBirth == customer.DateOfBirth) != null);
+
             return mock;
         }
     }

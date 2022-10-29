@@ -15,9 +15,7 @@ namespace CrudTest.Core.Services
 {
     public class CustomerService : ServiceBase, ICustomerService
     {
-        public CustomerService(IRepositoryManager repositoryManager) : base(repositoryManager)
-        {
-        }
+        public CustomerService(IRepositoryManager repositoryManager) : base(repositoryManager){}
 
         public async Task<IEnumerable<CustomerGetDTO>> GetAllAsync(CancellationToken cancellationToken = default)
         {
@@ -46,8 +44,12 @@ namespace CrudTest.Core.Services
             {
                 var customer = Mapper.Map<Customer>(customerCreateDTO);
 
-                //TODO: check for existing fName+lName+bDate and Email
-                //TODO: validate values
+                if (await RepositoryManager.CustomerRepository.CustomerExists(customer))
+                    throw new CustomerExistsException(customer.FirstName, customer.LastName, customer.DateOfBirth);
+
+                if (await RepositoryManager.CustomerRepository.EmailExists(customer.Email))
+                    throw new CustomerExistsException(customer.Email);
+
                 RepositoryManager.CustomerRepository.Insert(customer);
 
                 await RepositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
@@ -68,6 +70,11 @@ namespace CrudTest.Core.Services
 
                 if (customer is null)
                     throw new CustomerNotFoundException(customerId);
+
+                var email = new Email(customerUpdateDTO.Email);
+
+                if (await RepositoryManager.CustomerRepository.EmailExists(email))
+                    throw new CustomerExistsException(email);
 
                 Mapper.Map(customerUpdateDTO, customer);
 

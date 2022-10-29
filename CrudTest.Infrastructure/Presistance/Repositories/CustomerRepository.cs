@@ -1,6 +1,7 @@
 ﻿using CrudTest.Core.Domain.RepositoryInterfaces;
 using CrudTest.Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using CrudTest.Core.Domain.Entities.ValueObjects;
 
 namespace CrudTest.Infrastructure.Presistance.Repositories
 {
@@ -21,5 +22,9 @@ namespace CrudTest.Infrastructure.Presistance.Repositories
         public void Insert(Customer customer) => Create(customer);
 
         public void Remove(Customer customer) => Delete(customer);
+
+        public async Task<bool> EmailExists(Email email) => false;
+
+        public async Task<bool> CustomerExists(Customer customer) => false;
     }
 }
