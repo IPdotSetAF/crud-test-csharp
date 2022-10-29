@@ -4,12 +4,12 @@ updates customer
 
 @Update
 Scenario: Update customer
-	Given the Id of an existing customer and data (<IdSeed>,<Email>,<PhoneNumber>,<BankAccoutnNumber>)
+	Given the Id of an existing customer and data (<IdSeed>,<Email>,<PhoneNumber>,<BankAccountNumber>)
 	When updateing this customer using the data
 	Then the action should return (<StatusCode>)
 
 	Examples: 
-	| IdSeed	| Email                 | PhoneNumber    | BankAccountNumber | StatusCode |
+	| IdSeed	| Email                 | PhoneNumber    | BankAccountNumber  | StatusCode |
 	|	1		| ipdotsetaf1@gmail.com | +989387016860  | 1212121212121212   | 204        |
 	|	1		| ipdotsetaf1@gmail.com | +9816860		 | 1212121212121212   | 400        | #bad phonenumber
 	|	1		| ipdotsetaf1@gmail.com | +15417737024	 | 1212121212121212   | 201        | 

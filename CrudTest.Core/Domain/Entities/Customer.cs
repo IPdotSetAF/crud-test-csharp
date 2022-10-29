@@ -1,6 +1,4 @@
 ﻿using CrudTest.Core.Domain.Entities.ValueObjects;
-using PhoneNumbers;
-using System.ComponentModel.DataAnnotations;
 
 namespace CrudTest.Core.Domain.Entities
 {
@@ -10,8 +8,8 @@ namespace CrudTest.Core.Domain.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateOnly DateOfBirth { get; set; }
-        public ulong PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public ulong BankAccountNumber { get; set; }
+        public PhoneNumber PhoneNumber { get; set; }
+        public Email Email { get; set; }
+        public BankAccountNumber BankAccountNumber { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CrudTest.Infrastructure.Presistance.Migrations
 {
-    public partial class initial : Migration
+    public partial class switch_to_VO : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,13 +28,13 @@ namespace CrudTest.Infrastructure.Presistance.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customer",
-                columns: new[] { "Id", "BankAccountNumber", "DateOfBirth", "Email", "FirstName", "LastName", "PhoneNumber" },
+                columns: new[] { "Id", "DateOfBirth", "FirstName", "LastName", "BankAccountNumber", "Email", "PhoneNumber" },
                 values: new object[,]
                 {
-                    { new Guid("3dde6799-7063-d42e-ba04-85ff4e664534"), 1212121212121212m, new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "test2@gmail.com", "Hooshang", "Motahari", 989387016860m },
-                    { new Guid("5c740a82-5dab-dd83-8452-e4299aaad12f"), 1212121212121212m, new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "ipdotsetaf@gmail.com", "Mahdi", "Nazari", 989387016860m },
-                    { new Guid("b2c3a9ba-f1a9-2627-dce1-c0101ddfff08"), 1212121212121212m, new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "testt@gmail.com", "Saeed", "Rezaii", 19387016860m },
-                    { new Guid("ff336907-0499-11d1-0d89-6e2c525e39e5"), 1212121212121212m, new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "ipdotsetaf.work@gmail.com", "Ali", "Nazari", 989387016860m }
+                    { new Guid("3dde6799-7063-d42e-ba04-85ff4e664534"), new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hooshang", "Motahari", 1212121212121212m, "test2@gmail.com", 989387016860m },
+                    { new Guid("5c740a82-5dab-dd83-8452-e4299aaad12f"), new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Mahdi", "Nazari", 1212121212121212m, "ipdotsetaf@gmail.com", 989387016860m },
+                    { new Guid("b2c3a9ba-f1a9-2627-dce1-c0101ddfff08"), new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Saeed", "Rezaii", 1212121212121212m, "testt@gmail.com", 19387016860m },
+                    { new Guid("ff336907-0499-11d1-0d89-6e2c525e39e5"), new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ali", "Nazari", 1212121212121212m, "ipdotsetaf.work@gmail.com", 989387016860m }
                 });
 
             migrationBuilder.CreateIndex(

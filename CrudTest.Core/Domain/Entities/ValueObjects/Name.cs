@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace CrudTest.Core.Domain.Entities.ValueObjects
 {
-    public class Name
+    public class Name : ValueObject
     {
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+
+        public Name() { }
 
         public Name(string firstName, string lastName)
         {
@@ -17,6 +19,12 @@ namespace CrudTest.Core.Domain.Entities.ValueObjects
             LastName = lastName;
         }
 
-        public string FullName => $"{FirstName} {LastName}";
+        //public string FullName => $"{FirstName} {LastName}";
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            yield return FirstName;
+            yield return LastName;
+        }
     }
 }

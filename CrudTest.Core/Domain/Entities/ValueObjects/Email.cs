@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 
 namespace CrudTest.Core.Domain.Entities.ValueObjects
 {
-    public class Email
+    public class Email : ValueObject
     {
-        public string EmailText { get; private set; }
+        public string Value { get; private set; }
 
-        public Email(string emailText)
+        public Email() { }
+
+        public Email(string value)
         {
             //TODO: validate email
-            EmailText = emailText;
+            Value = value;
+        }
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            yield return Value;
         }
     }
 }

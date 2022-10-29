@@ -39,7 +39,7 @@ else
                      <td>@customer.FirstName</td>
                      <td>@customer.LastName</td>
                      <td>@customer.DateOfBirth.ToShortDateString()</td>
-                     <td>+@customer.PhoneNumber.ToString()</td>
+                     <td>+@customer.PhoneNumber</td>
                      <td>@customer.Email</td>
                      <td>@bNumber.Substring(0,4)-@bNumber.Substring(4,4)-@bNumber.Substring(8,4)-@bNumber.Substring(12,4)</td>
                      <td><input type="submit" value="Remove" class="delete" @onclick="() => DeleteCustomerById(customer.Id)"/></td>

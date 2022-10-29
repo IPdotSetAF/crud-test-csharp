@@ -128,7 +128,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 7
- testRunner.Given(string.Format("the Id of an existing customer and data ({0},{1},{2},<BankAccoutnNumber>)", idSeed, email, phoneNumber), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("the Id of an existing customer and data ({0},{1},{2},{3})", idSeed, email, phoneNumber, bankAccountNumber), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
  testRunner.When("updateing this customer using the data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

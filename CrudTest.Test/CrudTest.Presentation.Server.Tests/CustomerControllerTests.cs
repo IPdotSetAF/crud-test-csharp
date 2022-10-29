@@ -42,11 +42,11 @@ namespace CrudTest.Test.XUnitTests
         }
 
         [Theory]
-        [InlineData("mahdi", "nazari", "2012-1-20", 989387016860, "test@test.com", 1212121212121212, true)]
-        [InlineData("mahdi", "nazari", "2012-1-20", 989387016860, "ipdotsetaf.work@gmail.com", 1212121212121212, false)]
-        [InlineData("mahdi", "nazari", "2012-1-20", 989016860, "test@test.com", 1212121212121212, false)]
-        [InlineData("Ali", "Nazari", "2012-1-20", 989387016860, "test@test.com", 1212121212121212, false)]
-        public void GivenValidRequest_WhenCreatingCustomer_ThenCreatedReturns(string? firstName, string? lastName, DateTime dateOfBirth, ulong phoneNumber, string? email, ulong bankAccNumber, bool isValid)
+        [InlineData("mahdi", "nazari", "2012-1-20", "989387016860", "test@test.com", 1212121212121212, true)]
+        [InlineData("mahdi", "nazari", "2012-1-20", "+989387016860", "ipdotsetaf.work@gmail.com", 1212121212121212, false)]
+        [InlineData("mahdi", "nazari", "2012-1-20", "989016860", "test@test.com", 1212121212121212, false)]
+        [InlineData("Ali", "Nazari", "2012-1-20", "989387016860", "test@test.com", 1212121212121212, false)]
+        public void GivenValidRequest_WhenCreatingCustomer_ThenCreatedReturns(string? firstName, string? lastName, DateTime dateOfBirth, string phoneNumber, string? email, ulong bankAccNumber, bool isValid)
         {
             var customer = new CustomerCreateDTO
             {
@@ -75,10 +75,10 @@ namespace CrudTest.Test.XUnitTests
         }
 
         [Theory]
-        [InlineData(1, 989387016860, 1212121212121212, true)]
-        [InlineData(1, 989016860, 1212121212121212, false)]
-        [InlineData(5, 989387016860, 1212121212121212, false)]
-        public void GivenValidRequest_WhenUpdateingCustomer_ThenNothingReturns(int guidSeed, ulong phoneNumber, ulong bankAccNumber, bool isValid)
+        [InlineData(1, "+989387016860", 1212121212121212, true)]
+        [InlineData(1, "989016860", 1212121212121212, false)]
+        [InlineData(5, "989387016860", 1212121212121212, false)]
+        public void GivenValidRequest_WhenUpdateingCustomer_ThenNothingReturns(int guidSeed, string phoneNumber, ulong bankAccNumber, bool isValid)
         {
             var customer = new CustomerUpdateDTO
             {

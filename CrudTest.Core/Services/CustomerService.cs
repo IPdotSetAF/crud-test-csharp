@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrudTest.Core.Domain.Entities.ValueObjects;
 
 namespace CrudTest.Core.Services
 {
@@ -59,8 +60,8 @@ namespace CrudTest.Core.Services
                 throw new CustomerNotFoundException(customerId);
 
             //TODO: validate following values
-            customer.PhoneNumber = customerUpdateDTO.PhoneNumber;
-            customer.BankAccountNumber = customerUpdateDTO.BankAccountNumber;
+            customer.PhoneNumber = new PhoneNumber(customerUpdateDTO.PhoneNumber);
+            customer.BankAccountNumber = new BankAccountNumber(customerUpdateDTO.BankAccountNumber);
 
             await RepositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
         }
