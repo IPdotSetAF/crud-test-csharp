@@ -83,13 +83,13 @@ namespace CrudTest.Test.AcceptanceTests.Features
         [Xunit.SkippableTheoryAttribute(DisplayName="Get customer by id")]
         [Xunit.TraitAttribute("FeatureTitle", "CustomerGetById")]
         [Xunit.TraitAttribute("Description", "Get customer by id")]
-        [Xunit.TraitAttribute("Category", "GetById")]
+        [Xunit.TraitAttribute("Category", "CustomerGetById")]
         [Xunit.InlineDataAttribute("1", "200", new string[0])]
         [Xunit.InlineDataAttribute("5", "404", new string[0])]
         public virtual void GetCustomerById(string idSeed, string statusCode, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "GetById"};
+                    "CustomerGetById"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));

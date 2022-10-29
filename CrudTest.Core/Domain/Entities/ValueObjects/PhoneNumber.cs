@@ -9,8 +9,11 @@ namespace CrudTest.Core.Domain.Entities.ValueObjects
 
         public PhoneNumber() { }
 
-        public PhoneNumber(string value)
+        public PhoneNumber(string? value)
         {
+            if(value == null) 
+                throw new ArgumentNullException("Phone number can not be null.");
+
             string withPrefix = value;
 
             if (withPrefix[0] != '+')

@@ -83,13 +83,13 @@ namespace CrudTest.Test.AcceptanceTests.Features
         [Xunit.SkippableTheoryAttribute(DisplayName="Delete customer")]
         [Xunit.TraitAttribute("FeatureTitle", "CustomerDelete")]
         [Xunit.TraitAttribute("Description", "Delete customer")]
-        [Xunit.TraitAttribute("Category", "Delete")]
+        [Xunit.TraitAttribute("Category", "CustomerDelete")]
         [Xunit.InlineDataAttribute("1", "204", new string[0])]
         [Xunit.InlineDataAttribute("5", "404", new string[0])]
         public virtual void DeleteCustomer(string idSeed, string statusCode, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "Delete"};
+                    "CustomerDelete"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));

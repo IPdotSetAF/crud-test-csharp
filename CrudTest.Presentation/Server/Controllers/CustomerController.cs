@@ -50,9 +50,9 @@ namespace CrudTest.Presentation.Server.Controllers
 
                 return CreatedAtRoute("CustomerById", new { customerId = customer.Id }, customer);
             }
-            catch (Exception e) {
-                //TODO: catch creation errors
-                throw new NotImplementedException();
+            catch (Exception e)
+            {
+                return BadRequest(new ErrorDTO(BadRequest().StatusCode, e.Message));
             }
         }
 
@@ -69,6 +69,10 @@ namespace CrudTest.Presentation.Server.Controllers
             catch (CustomerNotFoundException e)
             {
                 return NotFound(new ErrorDTO(NotFound().StatusCode, e.Message));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ErrorDTO(BadRequest().StatusCode, e.Message));
             }
         }
 

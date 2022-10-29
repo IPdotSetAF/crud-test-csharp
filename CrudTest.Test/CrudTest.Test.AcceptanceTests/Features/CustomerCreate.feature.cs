@@ -83,19 +83,19 @@ namespace CrudTest.Test.AcceptanceTests.Features
         [Xunit.SkippableTheoryAttribute(DisplayName="Create customer")]
         [Xunit.TraitAttribute("FeatureTitle", "CustomerCreate")]
         [Xunit.TraitAttribute("Description", "Create customer")]
-        [Xunit.TraitAttribute("Category", "Create")]
+        [Xunit.TraitAttribute("Category", "CustomerCreate")]
         [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "ipdotsetaf1@gmail.com", "+989387016860", "1212121212121212", "201", new string[0])]
         [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "ipdotsetaf1@gmail.com", "+9816860", "1212121212121212", "400", new string[0])]
         [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "ipdotsetaf1@gmail.com", "+15417737024", "1212121212121212", "201", new string[0])]
-        [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "ipdotsetaf@gmail.com", "+15417737024", "1212121212121212", "400", new string[0])]
-        [Xunit.InlineDataAttribute("Ali", "Nazari", "7/18/1999", "test@test.com", "+15417737024", "1212121212121212", "400", new string[0])]
+        [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "ipdotsetaf.work@gmail.com", "+15417737024", "1212121212121212", "400", new string[0])]
+        [Xunit.InlineDataAttribute("Ali", "Nazari", "1/20/2012", "test@test.com", "+15417737024", "1212121212121212", "400", new string[0])]
         [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "ipdotsetaf1@gmail.com", "+15417737024", "13513131", "400", new string[0])]
-        [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "ipdotsetaf1@gmail", "+15417737024", "1212121212121212", "201", new string[0])]
-        [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "gmail.com", "+15417737024", "1212121212121212", "400", new string[0])]
+        [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "ipdotsetaf1@gmail", "+15417737024", "1212121212121212", "400", new string[0])]
+        [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "test.com", "+15417737024", "1212121212121212", "400", new string[0])]
         public virtual void CreateCustomer(string firstName, string lastName, string dateOfBirth, string email, string phoneNumber, string bankAccountNumber, string statusCode, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "Create"};
+                    "CustomerCreate"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));

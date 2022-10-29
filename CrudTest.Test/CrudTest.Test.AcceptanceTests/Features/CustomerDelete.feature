@@ -2,7 +2,7 @@
 
 deletes customer
 
-@Delete
+@CustomerDelete
 Scenario: Delete customer
 	Given The Id (<IdSeed>) of a customer
 	When sending delete request to action

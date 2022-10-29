@@ -83,18 +83,18 @@ namespace CrudTest.Test.AcceptanceTests.Features
         [Xunit.SkippableTheoryAttribute(DisplayName="Update customer")]
         [Xunit.TraitAttribute("FeatureTitle", "CustomerUpdate")]
         [Xunit.TraitAttribute("Description", "Update customer")]
-        [Xunit.TraitAttribute("Category", "Update")]
+        [Xunit.TraitAttribute("Category", "CustomerUpdate")]
         [Xunit.InlineDataAttribute("1", "ipdotsetaf1@gmail.com", "+989387016860", "1212121212121212", "204", new string[0])]
         [Xunit.InlineDataAttribute("1", "ipdotsetaf1@gmail.com", "+9816860", "1212121212121212", "400", new string[0])]
-        [Xunit.InlineDataAttribute("1", "ipdotsetaf1@gmail.com", "+15417737024", "1212121212121212", "201", new string[0])]
-        [Xunit.InlineDataAttribute("1", "ipdotsetaf@gmail.com", "+15417737024", "1212121212121212", "400", new string[0])]
+        [Xunit.InlineDataAttribute("1", "ipdotsetaf1@gmail.com", "+15417737024", "1212121212121212", "204", new string[0])]
+        [Xunit.InlineDataAttribute("1", "ipdotsetaf.work@gmail.com", "+15417737024", "1212121212121212", "400", new string[0])]
         [Xunit.InlineDataAttribute("5", "test@test.com", "+15417737024", "1212121212121212", "404", new string[0])]
         [Xunit.InlineDataAttribute("1", "ipdotsetaf1@gmail.com", "+15417737024", "13513131", "400", new string[0])]
-        [Xunit.InlineDataAttribute("1", "gmail.com", "+15417737024", "1212121212121212", "400", new string[0])]
+        [Xunit.InlineDataAttribute("1", "test.com", "+15417737024", "1212121212121212", "400", new string[0])]
         public virtual void UpdateCustomer(string idSeed, string email, string phoneNumber, string bankAccountNumber, string statusCode, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "Update"};
+                    "CustomerUpdate"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));

@@ -19,7 +19,7 @@ namespace CrudTest.Test.AcceptanceTests.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class CustomerGetAllFeature : object, Xunit.IClassFixture<CustomerGetAllFeature.FixtureData>, System.IDisposable
+    public partial class CustomerObjectFeature : object, Xunit.IClassFixture<CustomerObjectFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace CrudTest.Test.AcceptanceTests.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "CustomerGetAll.feature"
+#line 1 "CustomerObject.feature"
 #line hidden
         
-        public CustomerGetAllFeature(CustomerGetAllFeature.FixtureData fixtureData, CrudTest_Test_AcceptanceTests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public CustomerObjectFeature(CustomerObjectFeature.FixtureData fixtureData, CrudTest_Test_AcceptanceTests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace CrudTest.Test.AcceptanceTests.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "CustomerGetAll", "gets all customers list", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "CustomerObject", "validations for customer object", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,16 +80,35 @@ namespace CrudTest.Test.AcceptanceTests.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Get all customers")]
-        [Xunit.TraitAttribute("FeatureTitle", "CustomerGetAll")]
-        [Xunit.TraitAttribute("Description", "Get all customers")]
-        [Xunit.TraitAttribute("Category", "CustomerGetAll")]
-        public virtual void GetAllCustomers()
+        [Xunit.SkippableTheoryAttribute(DisplayName="Object Validation")]
+        [Xunit.TraitAttribute("FeatureTitle", "CustomerObject")]
+        [Xunit.TraitAttribute("Description", "Object Validation")]
+        [Xunit.TraitAttribute("Category", "CustomerObject")]
+        [Xunit.InlineDataAttribute("mahdi", "nazari", "7/18/1999", "ipdotsetaf1@gmail.com", "+989387016860", "1212121212121212", "true", new string[0])]
+        [Xunit.InlineDataAttribute("mahdi", "nazari", "7/18/1999", "ipdotsetaf1@gmail.com", "", "1212121212121212", "false", new string[0])]
+        [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "", "+15417737024", "1212121212121212", "false", new string[0])]
+        [Xunit.InlineDataAttribute("Ali", "Nazari", "1/20/2012", "test@test.com", "+9816860", "1212121212121212", "false", new string[0])]
+        [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "ipdotsetaf1@gmail.com", "+15417737024", "13513131", "false", new string[0])]
+        [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "ipdotsetaf1@gmail.com", "+15417737024", "1212121212121212", "true", new string[0])]
+        [Xunit.InlineDataAttribute("Mahdi", "Nazari", "7/18/1999", "test.com", "+15417737024", "1212121212121212", "false", new string[0])]
+        public virtual void ObjectValidation(string firstName, string lastName, string dateOfBirth, string email, string phoneNumber, string bankAccountNumber, string valid, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
-                    "CustomerGetAll"};
+            string[] @__tags = new string[] {
+                    "CustomerObject"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all customers", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            argumentsOfScenario.Add("FirstName", firstName);
+            argumentsOfScenario.Add("LastName", lastName);
+            argumentsOfScenario.Add("DateOfBirth", dateOfBirth);
+            argumentsOfScenario.Add("Email", email);
+            argumentsOfScenario.Add("PhoneNumber", phoneNumber);
+            argumentsOfScenario.Add("BankAccountNumber", bankAccountNumber);
+            argumentsOfScenario.Add("Valid", valid);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Object Validation", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -111,10 +130,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 7
- testRunner.When("I request to get all customers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given(string.Format("The customer data as ({0},{1},{2},{3},{4},{5})", firstName, lastName, dateOfBirth, email, phoneNumber, bankAccountNumber), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
- testRunner.Then("the action should return a list of all customers with Status code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("Creating a Customer object", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 9
+ testRunner.Then(string.Format("We should have a ({0}) Customer", valid), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -127,12 +149,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                CustomerGetAllFeature.FeatureSetup();
+                CustomerObjectFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                CustomerGetAllFeature.FeatureTearDown();
+                CustomerObjectFeature.FeatureTearDown();
             }
         }
     }

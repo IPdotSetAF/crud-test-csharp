@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CrudTest.Core.Domain.Entities.ValueObjects;
+using AutoMapper;
 
 namespace CrudTest.Core.Services
 {
@@ -41,29 +42,41 @@ namespace CrudTest.Core.Services
 
         public async Task<CustomerGetDTO> CreateAsync(CustomerCreateDTO customerCreateDTO, CancellationToken cancellationToken = default)
         {
-            var customer = Mapper.Map<Customer>(customerCreateDTO);
+            try
+            {
+                var customer = Mapper.Map<Customer>(customerCreateDTO);
 
-            //TODO: check for existing fName+lName+bDate and Email
-            //TODO: validate values
-            RepositoryManager.CustomerRepository.Insert(customer);
+                //TODO: check for existing fName+lName+bDate and Email
+                //TODO: validate values
+                RepositoryManager.CustomerRepository.Insert(customer);
 
-            await RepositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+                await RepositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return Mapper.Map<CustomerGetDTO>(customer);
+                return Mapper.Map<CustomerGetDTO>(customer);
+            }
+            catch (AutoMapperMappingException e)
+            {
+                throw e.InnerException;
+            }
         }
 
         public async Task UpdateAsync(Guid customerId, CustomerUpdateDTO customerUpdateDTO, CancellationToken cancellationToken = default)
         {
-            var customer = await RepositoryManager.CustomerRepository.GetByIdAsync(customerId, true, cancellationToken);
+            try
+            {
+                var customer = await RepositoryManager.CustomerRepository.GetByIdAsync(customerId, true, cancellationToken);
 
-            if (customer is null)
-                throw new CustomerNotFoundException(customerId);
+                if (customer is null)
+                    throw new CustomerNotFoundException(customerId);
 
-            //TODO: validate following values
-            customer.PhoneNumber = new PhoneNumber(customerUpdateDTO.PhoneNumber);
-            customer.BankAccountNumber = new BankAccountNumber(customerUpdateDTO.BankAccountNumber);
+                Mapper.Map(customerUpdateDTO, customer);
 
-            await RepositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+                await RepositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+            }
+            catch (AutoMapperMappingException e)
+            {
+                throw e.InnerException;
+            }
         }
 
         public async Task DeleteAsync(Guid customerId, CancellationToken cancellationToken = default)

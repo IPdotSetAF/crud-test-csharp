@@ -2,7 +2,7 @@
 
 gets customer by id
 
-@GetById
+@CustomerGetById
 Scenario: Get customer by id
 	Given the Id (<IdSeed>) of a customer
 	When I request to get the customer by that Id
