@@ -23,8 +23,14 @@ namespace CrudTest.Infrastructure.Presistance.Repositories
 
         public void Remove(Customer customer) => Delete(customer);
 
-        public async Task<bool> EmailExists(Email email) => false;
+        public async Task<bool> EmailExists(Email email) =>
+            (await FindByCondition(c => c.Email.Equals(email), false)
+                .FirstOrDefaultAsync()) != null;
 
-        public async Task<bool> CustomerExists(Customer customer) => false;
+        public async Task<bool> CustomerExists(Customer customer) =>
+            (await FindByCondition(c => c.FirstName.Equals(customer.FirstName) &&
+                                        c.LastName.Equals(customer.LastName) &&
+                                        c.DateOfBirth == customer.DateOfBirth, false)
+                .FirstOrDefaultAsync()) != null;
     }
 }
