@@ -29,7 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{3D0D7751-3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Test.AcceptanceTests", "CrudTest.Test\CrudTest.Test.AcceptanceTests\CrudTest.Test.AcceptanceTests.csproj", "{57C6BDF3-DE69-4889-8E66-7F5FAD2E44FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudTest.Test.SharedMocks", "CrudTest.Test\CrudTest.Test.SharedMocks\CrudTest.Test.SharedMocks.csproj", "{F2C7B326-CA0A-49CB-8E14-75D632395B2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Test.SharedMocks", "CrudTest.Test\CrudTest.Test.SharedMocks\CrudTest.Test.SharedMocks.csproj", "{F2C7B326-CA0A-49CB-8E14-75D632395B2C}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{121AFD77-52C1-4640-953F-2E96A1BDD911}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{F2C7B326-CA0A-49CB-8E14-75D632395B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2C7B326-CA0A-49CB-8E14-75D632395B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2C7B326-CA0A-49CB-8E14-75D632395B2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{121AFD77-52C1-4640-953F-2E96A1BDD911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{121AFD77-52C1-4640-953F-2E96A1BDD911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{121AFD77-52C1-4640-953F-2E96A1BDD911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{121AFD77-52C1-4640-953F-2E96A1BDD911}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

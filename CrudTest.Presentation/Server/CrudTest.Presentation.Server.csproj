@@ -5,6 +5,7 @@
     <UserSecretsId>df149f05-e3d6-4afd-9c3b-629fbd60fae7</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,12 @@
     <ProjectReference Include="..\..\CrudTest.Core\Services\CrudTest.Core.Services.csproj" />
     <ProjectReference Include="..\..\CrudTest.Infrastructure\Presistance\CrudTest.Infrastructure.Presistance.csproj" />
     <ProjectReference Include="..\Front\CrudTest.Presentation.Front.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="entrypoint.sh">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 

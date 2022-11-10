@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  crudtest.presentation.server:
+    image: ${DOCKER_REGISTRY-}crudtestpresentationserver
+    build:
+      context: .
+      dockerfile: CrudTest.Presentation/Server/Dockerfile
+      
+    depends_on: 
+      - db
+
+    networks:
+      - crudTestNetwork
+
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    ports:
+      - 1450:1433
+    environment:
+      SA_PASSWORD: "SecurePassword(UwU)"
+      ACCEPT_EULA: "Y"
+    networks:
+      - crudTestNetwork
+
+networks:
+  crudTestNetwork:
+    name: crudTestNetwork
