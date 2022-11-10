@@ -7,6 +7,10 @@ services:
       context: .
       dockerfile: CrudTest.Presentation/Server/Dockerfile
       
+    ports:
+      - 64201:80
+      - 64200:443
+
     depends_on: 
       - db
 
