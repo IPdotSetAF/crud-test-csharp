@@ -1,6 +1,6 @@
-﻿using CrudTest.Core.Domain.RepositoryInterfaces;
+﻿using CrudTest.Bussiness.Domain.RepositoryInterfaces;
 
-namespace CrudTest.Infrastructure.Presistance.Repositories
+namespace CrudTest.DataAccess.Presistance.Repositories
 {
     public class RepositoryManager : IRepositoryManager
     {

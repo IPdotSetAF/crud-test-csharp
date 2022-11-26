@@ -1,4 +1,4 @@
-﻿namespace CrudTest.Core.Services.Abstractions
+﻿namespace CrudTest.Bussiness.Services.Abstractions
 {
     public interface IServiceManager
     {

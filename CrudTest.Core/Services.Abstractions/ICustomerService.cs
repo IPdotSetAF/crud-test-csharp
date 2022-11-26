@@ -1,7 +1,7 @@
-﻿using CrudTest.Core.Contracts.DTOs.Customer;
+﻿using CrudTest.Bussiness.Contracts.DTOs.Customer;
 using System.Threading.Tasks;
 
-namespace CrudTest.Core.Services.Abstractions
+namespace CrudTest.Bussiness.Services.Abstractions
 {
     public interface ICustomerService
     {

@@ -1,17 +1,24 @@
-﻿using CrudTest.Core.Domain.Exceptions;
+﻿using CrudTest.Bussiness.Domain.Exceptions;
 using PhoneNumbers;
 
-namespace CrudTest.Core.Domain.Entities.ValueObjects
+namespace CrudTest.Bussiness.Domain.Entities.ValueObjects
 {
     public class PhoneNumber : ValueObject
     {
         public ulong Value { get; private set; }
 
-        public PhoneNumber() { }
+        private static readonly PhoneNumberUtil _phoneNumberUtil = PhoneNumberUtil.GetInstance();
 
-        public PhoneNumber(string? value)
+        private PhoneNumber() { }
+
+        public PhoneNumber(string value)
         {
-            if(value == null) 
+            Value = Validate(value);
+        }
+
+        private ulong Validate(string value)
+        {
+            if (string.IsNullOrEmpty(value))
                 throw new ArgumentNullException("Phone number can not be null.");
 
             string withPrefix = value;
@@ -21,10 +28,10 @@ namespace CrudTest.Core.Domain.Entities.ValueObjects
 
             try
             {
-                PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.GetInstance();
-                var pn = phoneNumberUtil.Parse(withPrefix, "");
-                if (phoneNumberUtil.IsValidNumber(pn))
-                    Value = UInt64.Parse(withPrefix.Substring(1));
+                //TODO: only accept mobile numbers
+                var pn = _phoneNumberUtil.Parse(withPrefix, "");
+                if (_phoneNumberUtil.IsValidNumber(pn))
+                    return UInt64.Parse(withPrefix.Substring(1));
                 else throw new InvalidPhoneNumberException(value);
             }
             catch (Exception)

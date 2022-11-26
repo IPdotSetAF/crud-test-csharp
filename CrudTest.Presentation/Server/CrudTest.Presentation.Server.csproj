@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CrudTest.Core\Services\CrudTest.Core.Services.csproj" />
-    <ProjectReference Include="..\..\CrudTest.Infrastructure\Presistance\CrudTest.Infrastructure.Presistance.csproj" />
+    <ProjectReference Include="..\..\CrudTest.Core\Services\CrudTest.Bussiness.Services.csproj" />
+    <ProjectReference Include="..\..\CrudTest.Infrastructure\Presistance\CrudTest.DataAccess.Presistance.csproj" />
     <ProjectReference Include="..\Front\CrudTest.Presentation.Front.csproj" />
   </ItemGroup>
 

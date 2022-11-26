@@ -8,11 +8,11 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["CrudTest.Presentation/Server/CrudTest.Presentation.Server.csproj", "CrudTest.Presentation/Server/"]
-COPY ["CrudTest.Core/Services/CrudTest.Core.Services.csproj", "CrudTest.Core/Services/"]
-COPY ["CrudTest.Core/Services.Abstractions/CrudTest.Core.Services.Abstractions.csproj", "CrudTest.Core/Services.Abstractions/"]
-COPY ["CrudTest.Core/Contracts/CrudTest.Core.Contracts.csproj", "CrudTest.Core/Contracts/"]
-COPY ["CrudTest.Core/Domain/CrudTest.Core.Domain.csproj", "CrudTest.Core/Domain/"]
-COPY ["CrudTest.Infrastructure/Presistance/CrudTest.Infrastructure.Presistance.csproj", "CrudTest.Infrastructure/Presistance/"]
+COPY ["CrudTest.Core/Services/CrudTest.Bussiness.Services.csproj", "CrudTest.Core/Services/"]
+COPY ["CrudTest.Core/Services.Abstractions/CrudTest.Bussiness.Services.Abstractions.csproj", "CrudTest.Core/Services.Abstractions/"]
+COPY ["CrudTest.Core/Contracts/CrudTest.Bussiness.Contracts.csproj", "CrudTest.Core/Contracts/"]
+COPY ["CrudTest.Core/Domain/CrudTest.Bussiness.Domain.csproj", "CrudTest.Core/Domain/"]
+COPY ["CrudTest.Infrastructure/Presistance/CrudTest.DataAccess.Presistance.csproj", "CrudTest.Infrastructure/Presistance/"]
 COPY ["CrudTest.Presentation/Front/CrudTest.Presentation.Front.csproj", "CrudTest.Presentation/Front/"]
 RUN dotnet restore "CrudTest.Presentation/Server/CrudTest.Presentation.Server.csproj"
 COPY . .

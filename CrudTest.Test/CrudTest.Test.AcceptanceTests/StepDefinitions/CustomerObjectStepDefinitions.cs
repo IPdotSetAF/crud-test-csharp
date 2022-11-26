@@ -1,6 +1,6 @@
-using CrudTest.Core.Contracts.DTOs.Customer;
-using CrudTest.Core.Domain.Entities;
-using CrudTest.Core.Domain.Entities.ValueObjects;
+using CrudTest.Bussiness.Contracts.DTOs.Customer;
+using CrudTest.Bussiness.Domain.Entities;
+using CrudTest.Bussiness.Domain.Entities.ValueObjects;
 using System;
 using TechTalk.SpecFlow;
 
@@ -9,8 +9,8 @@ namespace CrudTest.Test.AcceptanceTests.StepDefinitions
     [Binding]
     public class CustomerObjectStepDefinitions
     {
-        private Exception exception;
-        private CustomerGetDTO tempCustomer;
+        private Exception? exception;
+        private CustomerGetDTO? tempCustomer;
 
         [Given(@"The customer data as \((.*),(.*),(.*),(.*),(.*),(.*)\)")]
         public void GivenTheCustomerDataAs(string firstName, string lastName, DateTime dateOfBirth, string email, string phoneNumber, ulong bankAccountNumber)
@@ -29,21 +29,22 @@ namespace CrudTest.Test.AcceptanceTests.StepDefinitions
         [When(@"Creating a Customer object")]
         public void WhenCreatingACustomerObject()
         {
-            try
+            if (tempCustomer != null)
             {
-                var customer = new Customer
+                try
                 {
-                    FirstName = tempCustomer.FirstName,
-                    LastName = tempCustomer.LastName,
-                    DateOfBirth = DateOnly.FromDateTime(tempCustomer.DateOfBirth),
-                    Email = new Email(tempCustomer.Email),
-                    PhoneNumber = new PhoneNumber(tempCustomer.PhoneNumber),
-                    BankAccountNumber = new BankAccountNumber(tempCustomer.BankAccountNumber)
-                };
-            }
-            catch (Exception ex)
-            {
-                exception = ex;
+                    var customer = new Customer
+                    (
+                        person: new Person(tempCustomer.FirstName, tempCustomer.LastName, DateOnly.FromDateTime(tempCustomer.DateOfBirth)),
+                        email: new Email(tempCustomer.Email),
+                        phoneNumber: new PhoneNumber(tempCustomer.PhoneNumber),
+                        bankAccountNumber: new BankAccountNumber(tempCustomer.BankAccountNumber)
+                    );
+                }
+                catch (Exception ex)
+                {
+                    exception = ex;
+                }
             }
         }
 

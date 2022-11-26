@@ -1,11 +1,11 @@
-﻿using CrudTest.Core.Domain.Entities.ValueObjects;
+﻿using CrudTest.Bussiness.Domain.Entities.ValueObjects;
 
-namespace CrudTest.Core.Domain.Exceptions
+namespace CrudTest.Bussiness.Domain.Exceptions
 {
     public class CustomerExistsException : BadRequestException
     {
-        public CustomerExistsException(string firstName, string lastName , DateOnly dateOfBirth)
-            : base($"The customer with the FirstName {firstName}, LastName {lastName}, DateOfBirth {dateOfBirth.ToShortDateString()} already exists.")
+        public CustomerExistsException(Person person)
+            : base($"The customer with the FirstName {person.FirstName}, LastName {person.LastName}, DateOfBirth {person.DateOfBirth.ToShortDateString()} already exists.")
         {
         }
 

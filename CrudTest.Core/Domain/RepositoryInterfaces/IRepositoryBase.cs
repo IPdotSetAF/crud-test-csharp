@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace CrudTest.Core.Domain.RepositoryInterfaces
+namespace CrudTest.Bussiness.Domain.RepositoryInterfaces
 {
     public interface IRepositoryBase<T> where T : class
     {

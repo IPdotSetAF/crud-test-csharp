@@ -1,7 +1,7 @@
-﻿using CrudTest.Core.Contracts.DTOs;
-using CrudTest.Core.Contracts.DTOs.Customer;
-using CrudTest.Core.Domain.Exceptions;
-using CrudTest.Core.Services.Abstractions;
+﻿using CrudTest.Bussiness.Contracts.DTOs;
+using CrudTest.Bussiness.Contracts.DTOs.Customer;
+using CrudTest.Bussiness.Domain.Exceptions;
+using CrudTest.Bussiness.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

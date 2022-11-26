@@ -1,21 +1,22 @@
-﻿using CrudTest.Core.Domain.Entities;
-using CrudTest.Core.Domain.RepositoryInterfaces;
-using CrudTest.Core.Contracts.DTOs.Customer;
-using CrudTest.Core.Services.Abstractions;
-using CrudTest.Core.Domain.Exceptions;
+﻿using CrudTest.Bussiness.Domain.Entities;
+using CrudTest.Bussiness.Domain.RepositoryInterfaces;
+using CrudTest.Bussiness.Contracts.DTOs.Customer;
+using CrudTest.Bussiness.Services.Abstractions;
+using CrudTest.Bussiness.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CrudTest.Core.Domain.Entities.ValueObjects;
+using CrudTest.Bussiness.Domain.Entities.ValueObjects;
 using AutoMapper;
+using System.Diagnostics;
 
-namespace CrudTest.Core.Services
+namespace CrudTest.Bussiness.Services
 {
     public class CustomerService : ServiceBase, ICustomerService
     {
-        public CustomerService(IRepositoryManager repositoryManager) : base(repositoryManager){}
+        public CustomerService(IRepositoryManager repositoryManager) : base(repositoryManager) { }
 
         public async Task<IEnumerable<CustomerGetDTO>> GetAllAsync(CancellationToken cancellationToken = default)
         {
@@ -44,21 +45,22 @@ namespace CrudTest.Core.Services
             {
                 var customer = Mapper.Map<Customer>(customerCreateDTO);
 
-                if (await RepositoryManager.CustomerRepository.CustomerExists(customer))
-                    throw new CustomerExistsException(customer.FirstName, customer.LastName, customer.DateOfBirth);
+                if (await RepositoryManager.CustomerRepository.CustomerExists(customer.Person))
+                    throw new CustomerExistsException(customer.Person);
 
                 if (await RepositoryManager.CustomerRepository.EmailExists(customer.Email))
                     throw new CustomerExistsException(customer.Email);
 
                 RepositoryManager.CustomerRepository.Insert(customer);
-
                 await RepositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
 
                 return Mapper.Map<CustomerGetDTO>(customer);
             }
             catch (AutoMapperMappingException e)
             {
-                throw e.InnerException;
+                if (e.InnerException != null)
+                    throw e.InnerException;
+                throw e;
             }
         }
 
@@ -82,7 +84,8 @@ namespace CrudTest.Core.Services
             }
             catch (AutoMapperMappingException e)
             {
-                throw e.InnerException;
+                if (e.InnerException != null)
+                    throw e.InnerException;
             }
         }
 

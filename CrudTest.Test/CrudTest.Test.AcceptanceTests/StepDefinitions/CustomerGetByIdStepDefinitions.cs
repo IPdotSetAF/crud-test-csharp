@@ -1,6 +1,6 @@
-using CrudTest.Core.Contracts.DTOs;
-using CrudTest.Core.Contracts.DTOs.Customer;
-using CrudTest.Core.Contracts.Utils;
+using CrudTest.Bussiness.Contracts.DTOs;
+using CrudTest.Bussiness.Contracts.DTOs.Customer;
+using CrudTest.Bussiness.Contracts.Utils;
 using CrudTest.Test.SharedMocks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,7 @@ namespace CrudTest.Test.AcceptanceTests.StepDefinitions
     [Binding]
     public class CustomerGetByIdStepDefinitions
     {
-        private ObjectResult _result;
+        private ObjectResult? _result;
         private Guid _id;
 
         [Given(@"the Id \((.*)\) of a customer")]
@@ -32,15 +32,26 @@ namespace CrudTest.Test.AcceptanceTests.StepDefinitions
         public void ThenTheActionReturnsCustomerWithStatusCode(int statusCode)
         {
             Assert.NotNull(_result);
-            Assert.Equal(statusCode, _result.StatusCode);
-            if (statusCode == 200)
+
+            if (_result != null)
             {
-                Assert.Equal((_result.Value as CustomerGetDTO).Id, _id);
-                Assert.IsAssignableFrom<CustomerGetDTO>(_result.Value);
-            }
-            else
-            {
-                Assert.IsAssignableFrom<ErrorDTO>(_result.Value);
+                Assert.Equal(statusCode, _result.StatusCode);
+                if (statusCode == 200)
+                {
+                    Assert.NotNull(_result.Value);
+                    Assert.IsAssignableFrom<CustomerGetDTO>(_result.Value);
+
+                    var customer = _result.Value as CustomerGetDTO;
+
+                    if(customer != null)
+                    {
+                        Assert.Equal(customer.Id, _id);
+                    }
+                }
+                else
+                {
+                    Assert.IsAssignableFrom<ErrorDTO>(_result.Value);
+                }
             }
         }
     }

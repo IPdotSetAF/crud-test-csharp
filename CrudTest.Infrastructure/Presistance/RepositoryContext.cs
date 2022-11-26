@@ -1,6 +1,6 @@
-﻿using CrudTest.Core.Domain.Entities;
-using CrudTest.Infrastructure.Presistance.Configurations;
-using CrudTest.Infrastructure.Presistance.Converters;
+﻿using CrudTest.Bussiness.Domain.Entities;
+using CrudTest.DataAccess.Presistance.Configurations;
+using CrudTest.DataAccess.Presistance.Converters;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrudTest.Infrastructure.Presistance
+namespace CrudTest.DataAccess.Presistance
 {
     public class RepositoryContext : DbContext
     {

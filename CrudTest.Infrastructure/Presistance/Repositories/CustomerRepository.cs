@@ -1,9 +1,9 @@
-﻿using CrudTest.Core.Domain.RepositoryInterfaces;
-using CrudTest.Core.Domain.Entities;
+﻿using CrudTest.Bussiness.Domain.RepositoryInterfaces;
+using CrudTest.Bussiness.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using CrudTest.Core.Domain.Entities.ValueObjects;
+using CrudTest.Bussiness.Domain.Entities.ValueObjects;
 
-namespace CrudTest.Infrastructure.Presistance.Repositories
+namespace CrudTest.DataAccess.Presistance.Repositories
 {
     public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
     {
@@ -24,13 +24,13 @@ namespace CrudTest.Infrastructure.Presistance.Repositories
         public void Remove(Customer customer) => Delete(customer);
 
         public async Task<bool> EmailExists(Email email) =>
-            (await FindByCondition(c => c.Email.Equals(email), false)
+            (await FindByCondition(c => c.Email.Value.Equals(email.Value), false)
                 .FirstOrDefaultAsync()) != null;
 
-        public async Task<bool> CustomerExists(Customer customer) =>
-            (await FindByCondition(c => c.FirstName.Equals(customer.FirstName) &&
-                                        c.LastName.Equals(customer.LastName) &&
-                                        c.DateOfBirth == customer.DateOfBirth, false)
+        public async Task<bool> CustomerExists(Person person) =>
+            (await FindByCondition(c => c.Person.FirstName.Equals(person.FirstName) &&
+                                        c.Person.LastName.Equals(person.LastName) &&
+                                        c.Person.DateOfBirth == person.DateOfBirth, false)
                 .FirstOrDefaultAsync()) != null;
     }
 }

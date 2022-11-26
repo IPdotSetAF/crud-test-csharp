@@ -1,4 +1,4 @@
-﻿using CrudTest.Core.Domain.RepositoryInterfaces;
+﻿using CrudTest.Bussiness.Domain.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrudTest.Infrastructure.Presistance.Repositories
+namespace CrudTest.DataAccess.Presistance.Repositories
 {
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {

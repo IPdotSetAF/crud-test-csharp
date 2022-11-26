@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace CrudTest.Core.Contracts.Utils
+namespace CrudTest.Bussiness.Contracts.Utils
 {
     public static class GuidUtil
     {

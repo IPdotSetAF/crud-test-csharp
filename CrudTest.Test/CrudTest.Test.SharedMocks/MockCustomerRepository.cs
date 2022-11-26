@@ -1,8 +1,8 @@
 ﻿using Moq;
-using CrudTest.Core.Domain.RepositoryInterfaces;
-using CrudTest.Core.Domain.Entities;
-using CrudTest.Core.Contracts.Utils;
-using CrudTest.Core.Domain.Entities.ValueObjects;
+using CrudTest.Bussiness.Domain.RepositoryInterfaces;
+using CrudTest.Bussiness.Domain.Entities;
+using CrudTest.Bussiness.Contracts.Utils;
+using CrudTest.Bussiness.Domain.Entities.ValueObjects;
 
 namespace CrudTest.Test.SharedMocks
 {
@@ -15,45 +15,37 @@ namespace CrudTest.Test.SharedMocks
             var Customers = new List<Customer>()
             {
                 new Customer
-                {
-                    Id = GuidUtil.SeededGuid(1),
-                    FirstName = "Ali",
-                    LastName = "Nazari",
-                    PhoneNumber =  new PhoneNumber("989387016860"),
-                    BankAccountNumber = new BankAccountNumber(1212121212121212),
-                    Email = new Email("ipdotsetaf.work@gmail.com"),
-                    DateOfBirth= new DateOnly(2012,1,20)
-                },
+                (
+                    id : GuidUtil.SeededGuid(1),
+                    person : new Person("Ali", "Nazari", new DateOnly(2012,1,20)),
+                    phoneNumber : new PhoneNumber("989387016860"),
+                    bankAccountNumber : new BankAccountNumber(1212121212121212),
+                    email : new Email("ipdotsetaf.work@gmail.com")
+                ),
                 new Customer
-                {
-                    Id = GuidUtil.SeededGuid(2),
-                    FirstName = "Mahdi",
-                    LastName = "Nazari",
-                    PhoneNumber =  new PhoneNumber("982133341210"),
-                    BankAccountNumber = new BankAccountNumber(1212121212121212),
-                    Email = new Email("ipdotsetaf.work@gmail.com"),
-                    DateOfBirth= new DateOnly(2012,1,20)
-                },
+                (
+                    id : GuidUtil.SeededGuid(2),
+                    person: new Person("Mahdi", "Nazari", new DateOnly(2012,1,20)),
+                    phoneNumber: new PhoneNumber("982133341210"),
+                    bankAccountNumber: new BankAccountNumber(1212121212121212),
+                    email: new Email("ipdotsetaf.work@gmail.com")
+                ),
                 new Customer
-                {
-                    Id = GuidUtil.SeededGuid(3),
-                    FirstName = "Saeed",
-                    LastName = "Rezaii",
-                    PhoneNumber =  new PhoneNumber("16094032648"),
-                    BankAccountNumber = new BankAccountNumber(1212121212121212),
-                    Email = new Email("ipdotsetaf.work@gmail.com"),
-                    DateOfBirth= new DateOnly(2012,1,20)
-                },
+                (
+                    id : GuidUtil.SeededGuid(3),
+                    person : new Person("Saeed", "Rezaii", new DateOnly(2012,1,20)),
+                    phoneNumber : new PhoneNumber("16094032648"),
+                    bankAccountNumber : new BankAccountNumber(1212121212121212),
+                    email : new Email("ipdotsetaf.work@gmail.com")
+                ),
                 new Customer
-                {
-                    Id = GuidUtil.SeededGuid(4),
-                    FirstName = "Hooshang",
-                    LastName = "Motahari",
-                    PhoneNumber =  new PhoneNumber("989387016860"),
-                    BankAccountNumber = new BankAccountNumber(1212121212121212),
-                    Email = new Email("ipdotsetaf.work@gmail.com"),
-                    DateOfBirth= new DateOnly(2012,1,20)
-                }
+                (
+                    id : GuidUtil.SeededGuid(4),
+                    person : new Person("Hooshang", "Motahari", new DateOnly(2012,1,20)),
+                    phoneNumber : new PhoneNumber("989387016860"),
+                    bankAccountNumber : new BankAccountNumber(1212121212121212),
+                    email : new Email("ipdotsetaf.work@gmail.com")
+                )
             };
 
             mock.Setup(m => m.GetAllAsync(It.IsAny<bool>(), It.IsAny<CancellationToken>()))
@@ -63,18 +55,18 @@ namespace CrudTest.Test.SharedMocks
                 .ReturnsAsync((Guid id, bool trackChanges, CancellationToken cancellationToken) => Customers.FirstOrDefault(c => c.Id == id));
 
             mock.Setup(m => m.Insert(It.IsAny<Customer>()))
-                .Callback(() => { return; });
+                .Callback((Customer customer) => Customers.Add(customer));
 
             mock.Setup(m => m.Remove(It.IsAny<Customer>()))
-                .Callback(() => { return; });
+                .Callback((Customer customer) => Customers.Remove(customer));
 
             mock.Setup(m => m.EmailExists(It.IsAny<Email>()))
-               .ReturnsAsync((Email email) => Customers.FirstOrDefault(c => c.Email.Equals(email)) != null);
+                .ReturnsAsync((Email email) => Customers.FirstOrDefault(c => c.Email.Value.Equals(email.Value)) != null);
 
-            mock.Setup(m => m.CustomerExists(It.IsAny<Customer>()))
-                .ReturnsAsync((Customer customer) => Customers.FirstOrDefault(c => c.FirstName.Equals(customer.FirstName) &&
-                                                                            c.LastName.Equals(customer.LastName) &&
-                                                                            c.DateOfBirth == customer.DateOfBirth) != null);
+            mock.Setup(m => m.CustomerExists(It.IsAny<Person>()))
+                .ReturnsAsync((Person person) => Customers.FirstOrDefault(c => c.Person.FirstName.Equals(person.FirstName) &&
+                                                                                c.Person.LastName.Equals(person.LastName) &&
+                                                                                c.Person.DateOfBirth == person.DateOfBirth) != null);
 
             return mock;
         }

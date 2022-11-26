@@ -1,11 +1,11 @@
-﻿using CrudTest.Core.Domain.RepositoryInterfaces;
+﻿using CrudTest.Bussiness.Domain.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrudTest.Infrastructure.Presistance.Repositories
+namespace CrudTest.DataAccess.Presistance.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

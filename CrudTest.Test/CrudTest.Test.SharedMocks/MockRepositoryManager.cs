@@ -1,4 +1,4 @@
-﻿using CrudTest.Core.Domain.RepositoryInterfaces;
+﻿using CrudTest.Bussiness.Domain.RepositoryInterfaces;
 using Moq;
 
 namespace CrudTest.Test.SharedMocks

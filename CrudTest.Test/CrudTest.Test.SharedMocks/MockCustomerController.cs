@@ -1,4 +1,4 @@
-﻿using CrudTest.Core.Services;
+﻿using CrudTest.Bussiness.Services;
 using CrudTest.Presentation.Server.Controllers;
 
 namespace CrudTest.Test.SharedMocks

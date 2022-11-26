@@ -1,4 +1,4 @@
-﻿namespace CrudTest.Core.Domain.Exceptions
+﻿namespace CrudTest.Bussiness.Domain.Exceptions
 {
     public class InvalidPhoneNumberException : BadRequestException
     {

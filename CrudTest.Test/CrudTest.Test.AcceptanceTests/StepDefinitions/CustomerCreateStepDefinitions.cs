@@ -1,5 +1,5 @@
-using CrudTest.Core.Contracts.DTOs;
-using CrudTest.Core.Contracts.DTOs.Customer;
+using CrudTest.Bussiness.Contracts.DTOs;
+using CrudTest.Bussiness.Contracts.DTOs.Customer;
 using CrudTest.Test.SharedMocks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +12,8 @@ namespace CrudTest.Test.AcceptanceTests.StepDefinitions
     [Binding]
     public class CustomerCreateStepDefinitions
     {
-        private CustomerCreateDTO _customerCreateDTO;
-        private ObjectResult _result;
+        private CustomerCreateDTO? _customerCreateDTO;
+        private ObjectResult? _result;
 
         [Given(@"the customer data \((.*),(.*),(.*),(.*),(.*),(.*)\)")]
         public void GivenTheCustomerData(string firstName, string lastName, DateTime dateOfBirth, string email, string phoneNumber, ulong bankAccountNumber)
@@ -39,17 +39,21 @@ namespace CrudTest.Test.AcceptanceTests.StepDefinitions
         public void ThenTheActionShouldReturnStatusCode(int statusCode)
         {
             Assert.NotNull(_result);
-            Assert.Equal(statusCode, _result.StatusCode);
+            if (_result != null)
+            {
+                Assert.Equal(statusCode, _result.StatusCode);
 
-            if (statusCode == StatusCodes.Status201Created)
-            {
-                Assert.IsAssignableFrom<CreatedAtRouteResult>(_result);
-                Assert.Equal("CustomerById", (_result as CreatedAtRouteResult)!.RouteName);
+                if (statusCode == StatusCodes.Status201Created)
+                {
+                    Assert.IsAssignableFrom<CreatedAtRouteResult>(_result);
+                    Assert.Equal("CustomerById", (_result as CreatedAtRouteResult)!.RouteName);
+                }
+                else
+                {
+                    Assert.IsAssignableFrom<ErrorDTO>(_result.Value);
+                }
             }
-            else
-            {
-                Assert.IsAssignableFrom<ErrorDTO>(_result.Value);
-            }
+
         }
     }
 }

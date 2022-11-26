@@ -1,6 +1,6 @@
-using CrudTest.Core.Contracts.DTOs;
-using CrudTest.Core.Contracts.DTOs.Customer;
-using CrudTest.Core.Contracts.Utils;
+using CrudTest.Bussiness.Contracts.DTOs;
+using CrudTest.Bussiness.Contracts.DTOs.Customer;
+using CrudTest.Bussiness.Contracts.Utils;
 using CrudTest.Test.SharedMocks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +14,8 @@ namespace CrudTest.Test.AcceptanceTests.StepDefinitions
     public class CustomerUpdateStepDefinitions
     {
         private Guid _id;
-        private CustomerUpdateDTO _customerUpdateDTO;
-        private ObjectResult _result;
+        private CustomerUpdateDTO? _customerUpdateDTO;
+        private ObjectResult? _result;
 
         [Given(@"the Id of an existing customer and data \((.*),(.*),(.*),(.*)\)")]
         public void GivenTheIdOfAnExistingCustomerAndData(int idSeed, string email, string phoneNumber, ulong bankAccountNumber)
@@ -51,8 +51,11 @@ namespace CrudTest.Test.AcceptanceTests.StepDefinitions
             }
             else
             {
-                Assert.Equal(statusCode, _result.StatusCode);
-                Assert.IsAssignableFrom<ErrorDTO>(_result.Value);
+                if (_result != null)
+                {
+                    Assert.Equal(statusCode, _result.StatusCode);
+                    Assert.IsAssignableFrom<ErrorDTO>(_result.Value);
+                }
             }
         }
     }

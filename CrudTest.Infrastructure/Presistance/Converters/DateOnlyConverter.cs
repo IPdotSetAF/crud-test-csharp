@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CrudTest.Infrastructure.Presistance.Converters
+namespace CrudTest.DataAccess.Presistance.Converters
 {
     public class DateOnlyConverter : ValueConverter<DateOnly, DateTime>
     {

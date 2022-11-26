@@ -1,7 +1,7 @@
-﻿using CrudTest.Core.Domain.Entities;
-using CrudTest.Core.Domain.Entities.ValueObjects;
+﻿using CrudTest.Bussiness.Domain.Entities;
+using CrudTest.Bussiness.Domain.Entities.ValueObjects;
 
-namespace CrudTest.Core.Domain.RepositoryInterfaces
+namespace CrudTest.Bussiness.Domain.RepositoryInterfaces
 {
     public interface ICustomerRepository
     {
@@ -10,6 +10,6 @@ namespace CrudTest.Core.Domain.RepositoryInterfaces
         void Insert(Customer customer);
         void Remove(Customer customer);
         Task<bool> EmailExists(Email email);
-        Task<bool> CustomerExists(Customer customer);
+        Task<bool> CustomerExists(Person person);
     }
 }

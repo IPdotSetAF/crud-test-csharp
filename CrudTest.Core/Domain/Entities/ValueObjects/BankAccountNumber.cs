@@ -1,22 +1,26 @@
-﻿using CrudTest.Core.Domain.Exceptions;
+﻿using CrudTest.Bussiness.Domain.Exceptions;
 
-namespace CrudTest.Core.Domain.Entities.ValueObjects
+namespace CrudTest.Bussiness.Domain.Entities.ValueObjects
 {
     public class BankAccountNumber : ValueObject
     {
         public ulong Value { get; private set; }
 
-        public BankAccountNumber() { }
+        private BankAccountNumber() { }
 
-        public BankAccountNumber(ulong? value)
+        public BankAccountNumber(ulong value)
         {
-            if(!value.HasValue)
-                throw new NullReferenceException("BankAccountNumber can not be null.");
+            Value = Validate(value);
+        }
 
-            if (value < 1000000000000000 || value > 9999999999999999) 
-                throw new InvalidBankAccountNumberException(value.Value); 
+        private ulong Validate(ulong value)
+        {
+            //TODO: use IBAN for validation
 
-            Value = value.Value;
+            if (value < 1000000000000000 || value > 9999999999999999)
+                throw new InvalidBankAccountNumberException(value);
+
+            return value;
         }
 
         protected override IEnumerable<object> GetAtomicValues()

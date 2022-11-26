@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrudTest.Core.Domain.Entities.ValueObjects
+namespace CrudTest.Bussiness.Domain.Entities.ValueObjects
 {
     public abstract class ValueObject
     {
@@ -24,7 +24,9 @@ namespace CrudTest.Core.Domain.Entities.ValueObjects
 
         protected abstract IEnumerable<object> GetAtomicValues();
 
+#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
         public override bool Equals(object obj)
+#pragma warning restore CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
         {
             if (obj == null || obj.GetType() != GetType())
             {

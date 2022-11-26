@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace CrudTest.Core.Domain.RepositoryInterfaces
+namespace CrudTest.Bussiness.Domain.RepositoryInterfaces
 {
     public interface IUnitOfWork
     {

@@ -1,5 +1,5 @@
-using CrudTest.Core.Contracts.DTOs;
-using CrudTest.Core.Contracts.Utils;
+using CrudTest.Bussiness.Contracts.DTOs;
+using CrudTest.Bussiness.Contracts.Utils;
 using CrudTest.Test.SharedMocks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,7 @@ namespace CrudTest.Test.AcceptanceTests.StepDefinitions
     public class CustomerDeleteStepDefinitions
     {
         private Guid _id;
-        private ObjectResult _result;
+        private ObjectResult? _result;
 
         [Given(@"The Id \((.*)\) of a customer")]
         public void GivenTheIdOfACustomer(int idSeed)
@@ -42,6 +42,7 @@ namespace CrudTest.Test.AcceptanceTests.StepDefinitions
             }
             else
             {
+                Assert.NotNull(_result);
                 Assert.Equal(statusCode, _result.StatusCode);
                 Assert.IsAssignableFrom<ErrorDTO>(_result.Value);
             }

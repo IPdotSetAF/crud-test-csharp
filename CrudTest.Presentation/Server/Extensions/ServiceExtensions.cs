@@ -1,8 +1,8 @@
-﻿using CrudTest.Core.Domain.RepositoryInterfaces;
-using CrudTest.Core.Services;
-using CrudTest.Core.Services.Abstractions;
-using CrudTest.Infrastructure.Presistance;
-using CrudTest.Infrastructure.Presistance.Repositories;
+﻿using CrudTest.Bussiness.Domain.RepositoryInterfaces;
+using CrudTest.Bussiness.Services;
+using CrudTest.Bussiness.Services.Abstractions;
+using CrudTest.DataAccess.Presistance;
+using CrudTest.DataAccess.Presistance.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

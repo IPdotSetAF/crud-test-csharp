@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using CrudTest.Core.Domain.RepositoryInterfaces;
+using CrudTest.Bussiness.Domain.RepositoryInterfaces;
 
-namespace CrudTest.Core.Services
+namespace CrudTest.Bussiness.Services
 {
     public abstract class ServiceBase
     {

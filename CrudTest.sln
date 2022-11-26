@@ -7,21 +7,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Presentation.Front
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Presentation.Server", "CrudTest.Presentation\Server\CrudTest.Presentation.Server.csproj", "{8D41010B-AEF1-4742-B7EC-6A5AE62C45FC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Core.Contracts", "CrudTest.Core\Contracts\CrudTest.Core.Contracts.csproj", "{9AFC02AA-40C5-4A18-94F1-301606BCCEA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Bussiness.Contracts", "CrudTest.Core\Contracts\CrudTest.Bussiness.Contracts.csproj", "{9AFC02AA-40C5-4A18-94F1-301606BCCEA6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Test.XUnitTests", "CrudTest.Test\CrudTest.Presentation.Server.Tests\CrudTest.Test.XUnitTests.csproj", "{634ADF82-FC08-4D1B-A823-D2E1A3352182}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7B8D5FBA-CB0C-484F-80C2-86086F389913}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bussiness", "Bussiness", "{7B8D5FBA-CB0C-484F-80C2-86086F389913}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{1432E636-FBAD-4ACD-9305-66CF665B2440}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{1432E636-FBAD-4ACD-9305-66CF665B2440}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Core.Domain", "CrudTest.Core\Domain\CrudTest.Core.Domain.csproj", "{58175ABE-2797-41BF-8541-D81ABA74E846}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Bussiness.Domain", "CrudTest.Core\Domain\CrudTest.Bussiness.Domain.csproj", "{58175ABE-2797-41BF-8541-D81ABA74E846}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Core.Services", "CrudTest.Core\Services\CrudTest.Core.Services.csproj", "{3E3C0E58-1CB8-4A47-9B37-2CCD5C0DB4F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Bussiness.Services", "CrudTest.Core\Services\CrudTest.Bussiness.Services.csproj", "{3E3C0E58-1CB8-4A47-9B37-2CCD5C0DB4F4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Core.Services.Abstractions", "CrudTest.Core\Services.Abstractions\CrudTest.Core.Services.Abstractions.csproj", "{13B53308-9DF2-4982-A833-6908AC12BA92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Bussiness.Services.Abstractions", "CrudTest.Core\Services.Abstractions\CrudTest.Bussiness.Services.Abstractions.csproj", "{13B53308-9DF2-4982-A833-6908AC12BA92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.Infrastructure.Presistance", "CrudTest.Infrastructure\Presistance\CrudTest.Infrastructure.Presistance.csproj", "{13AD0F7B-8235-4812-BB2B-B15BF3908C18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTest.DataAccess.Presistance", "CrudTest.Infrastructure\Presistance\CrudTest.DataAccess.Presistance.csproj", "{13AD0F7B-8235-4812-BB2B-B15BF3908C18}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{6FB7A3E9-CA7E-45F1-B3B6-A0FE9165B55B}"
 EndProject

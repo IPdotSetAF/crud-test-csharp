@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Services.Abstractions\CrudTest.Core.Services.Abstractions.csproj" />
+    <ProjectReference Include="..\Services.Abstractions\CrudTest.Bussiness.Services.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

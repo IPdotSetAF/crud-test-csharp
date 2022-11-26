@@ -1,4 +1,4 @@
-﻿namespace CrudTest.Core.Contracts.DTOs
+﻿namespace CrudTest.Bussiness.Contracts.DTOs
 {
     public class ErrorDTO
     {

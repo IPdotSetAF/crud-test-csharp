@@ -1,7 +1,7 @@
-﻿using CrudTest.Core.Domain.RepositoryInterfaces;
+﻿using CrudTest.Bussiness.Domain.RepositoryInterfaces;
 using System.Threading.Tasks;
 
-namespace CrudTest.Core.Domain.RepositoryInterfaces
+namespace CrudTest.Bussiness.Domain.RepositoryInterfaces
 {
     public interface IRepositoryManager
     {

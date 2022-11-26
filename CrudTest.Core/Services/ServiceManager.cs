@@ -1,7 +1,7 @@
-﻿using CrudTest.Core.Domain.RepositoryInterfaces;
-using CrudTest.Core.Services.Abstractions;
+﻿using CrudTest.Bussiness.Domain.RepositoryInterfaces;
+using CrudTest.Bussiness.Services.Abstractions;
 
-namespace CrudTest.Core.Services
+namespace CrudTest.Bussiness.Services
 {
     public class ServiceManager : IServiceManager
     {
